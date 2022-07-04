@@ -1,7 +1,9 @@
 const router = require("express").Router();
 const Event = require('../models/Event');
 
-router.get('/events', (req, res, next) => {
+router.get('/events/new')
+
+router.post('/events', (req, res, next) => {
     const {title, date, capacity, participants, location, creator} = req.body
     Event.create({
         title: title,
@@ -10,5 +12,11 @@ router.get('/events', (req, res, next) => {
         participants: participants,
         location: location,
         creator: creator
+    })
+    .then(newEvent => {
+        res.redirect('/events')
+    })
+    .catch(err => {
+        res.render('events/new')
     })
 })

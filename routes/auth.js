@@ -1,42 +1,31 @@
 const router = require("express").Router();
-const User = require("../models/User.model");
-const bcrypt = require("bcryptjs");
+const User = require('../models/User.model')
+const bcrypt = require('bcryptjs');
+const { isLoggedOut } = require("../middleware/route-guard");
 const saltRounds = 10;
 
-router.get("/signup", (req, res, next) => {
-  res.render("signup");
-});
+router.get('/signup', isLoggedOut, (req, res, next) => {
+    res.render('signup')
+})
 
-router.post("/signup", (req, res, next) => {
-  const { username, email, /* phoneNumber, */ password } = req.body;
-  if (password.length < 4) {
-    res.render("signup", {
-      message: "Password has to be minimum 4 characters.",
-    });
-    return;
-  }
-  if (username === "") {
-    res.render("signup", { message: "Username cannot be empty." });
-  }
-  if (password.length === "") {
-    res.render("signup", { message: "Password cannot be empty" });
-  }
-  User.findOne({ username: username }).then((userFromDB) => {
-    if (userFromDB !== null) {
-      res.render("signup", { message: "The username is already taken" });
-      return;
-    }
-    if (username === "") {
-      res.render("signup", { message: "Username cannot be empty." });
-    }
-    if (password.length === "") {
-      res.render("signup", { message: "Password cannot be empty" });
+router.post('/signup', isLoggedOut, (req, res, next) => {
+    const {username, email, /* phoneNumber, */ password} = req.body;
+    if(password.length < 4) {
+        res.render('signup', {message: 'Password has to be minimum 4 characters.'})
+        return;
+    };
+    if (username === '') {
+        res.render('signup', {message: 'Username cannot be empty.'})
+    };
+    if (password.length === ''){
+        res.render('signup', {message: 'Password cannot be empty'})
     }
     User.findOne({ username: username }).then((userFromDB) => {
-      if (userFromDB !== null) {
+    if (userFromDB !== null) {
         res.render("signup", { message: "The username is already taken" });
         return;
-      } else {
+
+    } else {
         const salt = bcrypt.genSaltSync();
         const hash = bcrypt.hashSync(password, salt);
 
@@ -52,13 +41,10 @@ router.post("/signup", (req, res, next) => {
           .catch((err) => {
             next(err);
           })
-          .catch((err) => {
-            next(err);
-          });
       }
     });
   });
-});
+
 
 router.get("/login", (req, res, next) => {
   res.render("login");
