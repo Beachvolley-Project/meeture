@@ -8,7 +8,7 @@ router.get('/signup', (req, res, next) => {
 })
 
 router.post('/signup', (req, res, next) => {
-    const {username, /* email, phoneNumber, */ password} = req.body;
+    const {username, email, /* phoneNumber, */ password} = req.body;
     if(password.length < 4) {
         res.render('signup', {message: 'Password has to be minimum 4 characters.'})
         return;
@@ -25,9 +25,16 @@ User.findOne({username: username})
         res.render('signup', {message: 'The username is already taken'})
     return;
     } else {
-        const salt = bcrypt.genSaltSync(password, salt)
-        User.create({username: username, password: hash})
+        const salt = bcrypt.genSaltSync()
+		const hash = bcrypt.hashSync(password, salt)
+        
+        User.create({
+            username: username, 
+            password: hash,
+            email: email,            
+        })
         .then(createdUser => {
+            console.log(createdUser)
             res.redirect('/login')
         })
         .catch(err => {
