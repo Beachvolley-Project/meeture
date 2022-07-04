@@ -5,12 +5,34 @@ const userSchema = new Schema(
   {
     username: {
       type: String,
-      // unique: true -> Ideally, should be unique, but its up to you
+      trim: true,
+      unique: true,
+      required: [true, "Please tell us your name!"],
     },
-    password: String,
+    password: {
+      type: String,
+      minlength: 4,
+      required: [true, "Please provide a password!"],
+    },
+    role: {
+      type: String,
+      enum: ["user", "admin"],
+      default: "user",
+    },
+    email: {
+      type: String,
+      trim: true,
+      lowercase: true,
+      unique: true,
+      required: [true, "Email address is required"],
+      validate: [validateEmail, "Please fill a valid email address"],
+      match: [
+        /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+        "Please fill a valid email address",
+      ],
+    },
   },
   {
-    // this second object adds extra properties: `createdAt` and `updatedAt`
     timestamps: true,
   }
 );
