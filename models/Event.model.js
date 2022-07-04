@@ -9,11 +9,6 @@ const eventSchema = new Schema(
       unique: true,
       required: [true, "Please tell us the title of the event!"],
     },
-    location: {
-      type: String,
-      minlength: 4,
-      required: [true, "Please provide an address"],
-    },
     date: {
       type: Date,
     },
@@ -32,7 +27,11 @@ const eventSchema = new Schema(
         max: 10,
       },
     },
-    owner: {
+    location: {
+      type: Schema.Types.ObjectId,
+      ref: "Places",
+    },
+    creator: {
       type: Schema.Types.ObjectId,
       ref: "User",
     },
