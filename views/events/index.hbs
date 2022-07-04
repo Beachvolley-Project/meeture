@@ -1,0 +1,15 @@
+<h1>Event List</h1>
+
+<ul>
+{{#each eventList}}
+<li>
+ <a href="events/{{id}}">
+ {{this.title}}
+ </a>
+    
+</li>
+
+{{/each}}
+</ul>
+
+<a href="events/new">Create an Event</a>
