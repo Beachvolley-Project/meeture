@@ -7,7 +7,7 @@ const mongouri = process.env.MONGODB_URI;
 mongoose.connect(mongouri);
 
 
-const places = [
+const locations = [
     {
         "Name": "Beach Mitte",
         "Address": "Caroline-Michaelis-Straße 8, 10115 Berlin",
@@ -72,10 +72,10 @@ const places = [
       }
 ];
 
-Place.insertMany(places)
-  .then((placesFromDB) => {
+Place.insertMany(locations)
+  .then((locationsFromsDb) => {
     console.log(
-      `Success - ${placesFromDB.length} places got created`
+      `Success - ${locationsFromsDb.length} locations got created`
     );
     mongoose.connection.close();
   })

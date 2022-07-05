@@ -1,9 +1,26 @@
 const router = require("express").Router();
 const Event = require('../models/Event');
+const Location = require('../models/Location');
 
-router.get('/events/new')
+// ADD I : LISTS THE LOCATIONS TO SELECT
+router.get('/events/new', (req, res, next) => {
+    Location.find()  
+    .then(locationFromDb => {
+        res.render('events/new', { locationList: locationFromDb })
+    })
+    .catch((err) => {
+        next(err)
+    })
+  })
 
-router.post('/events', (req, res, next) => {
+// CREATES NEW EVENT
+router.get('/events/new', (req, res, next) => {
+    res.render('events/new')
+  });
+
+// ADD II : POSTS THE ENTRIES TO EVENTS PAGE
+
+  router.post('/events', (req, res, next) => {
     const {title, date, capacity, participants, location, creator} = req.body
     Event.create({
         title: title,
