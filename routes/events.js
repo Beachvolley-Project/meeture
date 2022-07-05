@@ -20,23 +20,26 @@ router.get("/events/new", (req, res, next) => {
 });
 
 router.get("/events", (req, res, next) => {
-  res.render("events/");
+  res.render("events");
 });
 
 // ADD II : POSTS THE ENTRIES TO EVENTS PAGE
 
 router.post("/events", (req, res, next) => {
-  const { title, date, capacity, participants, location, creator } = req.body;
+  // console.log(req.session.currentUser);
+  const userId = req.session.currentUser._id;
+  console.log(userId);
+  const { title, date, capacity, location } = req.body;
   Event.create({
     title: title,
     date: date,
     capacity: capacity,
-    participants: participants,
     location: location,
-    creator: creator,
+    creator: userId,
   })
     .then((newEvent) => {
-      res.redirect("events/");
+      console.log(newEvent);
+      res.redirect("events");
     })
     .catch((err) => {
       res.render("events/new");
@@ -44,17 +47,13 @@ router.post("/events", (req, res, next) => {
 });
 
 // SHOWS THE EVENTS ON THE EVENTS PAGE
-router.get('/events', (req, res, next) => {
+router.get("/events", (req, res, next) => {
   Event.find()
-  .then(eventsFromDB => {
-      console.log(eventsFromDB)
-      res.render('events/index', {eventList: eventsFromDB})
-  })    
-  .catch(err =>
-      next(err))
-})
+    .then((eventsFromDB) => {
+      console.log(eventsFromDB);
+      res.render("events/index", { eventList: eventsFromDB });
+    })
+    .catch((err) => next(err));
+});
 
 module.exports = router;
-
-
-
