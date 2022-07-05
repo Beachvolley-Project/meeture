@@ -67,7 +67,7 @@ router.post("/login", (req, res, next) => {
         return;
       } else if (bcrypt.compareSync(password, user.password)) {
         //req.session.currentUser = user; // SESSION
-        res.render("login", {
+        res.render("events", {
           // this has to be the event page
           user: user,
           // userInSession: req.session.currentUser,
