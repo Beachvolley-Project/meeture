@@ -52,7 +52,24 @@ router.get("/events", (req, res, next) => {
       console.log('contro: ', eventsFromDB);
       res.render("events/index", { eventList: eventsFromDB });
     })
-    .catch((err) => next(err));
+    .catch((err) => next(err)); 
 });
+
+//GO TO JOIN PAGE
+
+router.get('/events/:id', (req, res, next) => {
+  const eventId = req.params.id;
+  const userId = req.session.currentUser._id;
+  console.log('userObject: ', userId)
+  Event.findByIdAndUpdate(eventId, {$push: {participants: userId}})
+  .populate('participants')
+  .then(eventFromDB => {
+    console.log('eventfromDB: ', eventFromDB)
+    res.render('events/eventDetails', {event: eventFromDB})
+  })
+  .catch(err => {
+    next(err)
+  })
+})
 
 module.exports = router;
