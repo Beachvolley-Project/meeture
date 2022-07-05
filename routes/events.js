@@ -43,5 +43,18 @@ router.post("/events", (req, res, next) => {
     });
 });
 
-// MAPS
+// SHOWS THE EVENTS ON THE EVENTS PAGE
+router.get('/events', (req, res, next) => {
+  Event.find()
+  .then(eventsFromDB => {
+      console.log(eventsFromDB)
+      res.render('events/index', {eventList: eventsFromDB})
+  })    
+  .catch(err =>
+      next(err))
+})
+
+module.exports = router;
+
+
 
