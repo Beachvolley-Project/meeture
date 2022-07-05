@@ -9,7 +9,7 @@ router.get("/signup", isLoggedOut, (req, res, next) => {
 });
 
 router.post("/signup", isLoggedOut, (req, res, next) => {
-  const { username, email, /* phoneNumber, */ password } = req.body;
+  const { username, email, phoneNumber, password } = req.body;
   if (password.length < 4) {
     res.render("signup", {
       message: "Password has to be minimum 4 characters.",
@@ -22,7 +22,8 @@ router.post("/signup", isLoggedOut, (req, res, next) => {
   if (password.length === "") {
     res.render("signup", { message: "Password cannot be empty" });
   }
-  User.findOne({ username: username }).then((userFromDB) => {
+  User.findOne({ username: username })
+  .then((userFromDB) => {
     if (userFromDB !== null) {
       res.render("signup", { message: "The username is already taken" });
       return;
@@ -66,11 +67,11 @@ router.post("/login", (req, res, next) => {
         });
         return;
       } else if (bcrypt.compareSync(password, user.password)) {
-        //req.session.currentUser = user; // SESSION
-        res.render("events/", {
+        req.session.currentUser = user; // SESSION
+        res.render("events", {
           // this has to be the event page
           user: user,
-          // userInSession: req.session.currentUser,
+        userInSession: req.session.currentUser,
         });
       } else {
         res.render("login", { errorMessage: "Incorrect password." });

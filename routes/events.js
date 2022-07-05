@@ -20,22 +20,23 @@ router.get("/events/new", (req, res, next) => {
 });
 
 router.get("/events", (req, res, next) => {
-  res.render("events/");
+  res.render("events");
 });
 
 // ADD II : POSTS THE ENTRIES TO EVENTS PAGE
 
 router.post("/events", (req, res, next) => {
+  console.log(req.body)
   const { title, date, capacity, participants, location, creator } = req.body;
   Event.create({
     title: title,
     date: date,
     capacity: capacity,
-    participants: participants,
     location: location,
-    creator: creator,
+    /* creator: creator, */
   })
     .then((newEvent) => {
+      console.log(newEvent)
       res.redirect("events/");
     })
     .catch((err) => {

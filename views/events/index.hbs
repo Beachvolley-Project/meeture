@@ -3,9 +3,11 @@
 <ul>
   {{#each eventList}}
     <li>
-      <a href="events/{{id}}">
+      {{!-- <a href="events/{{_id}}"> --}}
         {{this.title}}
-      </a>
+        {{this.date}}
+        {{this.capacity}}
+      {{!-- </a> --}}
 
     </li>
 
@@ -13,3 +15,14 @@
 </ul>
 
 <a href="events/new">Create an Event</a>
+
+<h2>NODEMAILER</h2>
+<form action="/send-email" method="post">
+  <label for="">Email</label>
+  <input type="email" name="email" id="">
+  <label for="">Subject</label>
+  <input type="text" name="subject" id="">
+  <label for="">Message</label>
+  <textarea type="text" name="message" id=""></textarea>
+  <button type="submit">Submit</button>
+</form>
