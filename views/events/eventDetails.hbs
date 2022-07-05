@@ -1,0 +1,23 @@
+{{#with event}}
+    <h2>Event Information</h2>
+    <ul>
+    <li>Title: {{title}}</li>
+    <li>Date:  {{date}}</li>
+    <li>Capacity: {{capacity}}</li>
+    <p>Participant:</p>
+    {{#each participants}}
+     <li> {{username}}</li>
+    {{/each}}
+    </ul>
+
+{{!--      <select name="participants">
+
+    
+      <option value="{{_id}}">{{username}}</option>
+    
+
+    </select> --}}
+    {{!-- <a href="/events/{{id}}/edit">Edit the event</a> --}}
+{{/with}}
+
+
