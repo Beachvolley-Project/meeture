@@ -49,7 +49,7 @@ router.get("/events", (req, res, next) => {
     .populate('creator')
     .populate('location')
     .then((eventsFromDB) => {
-      console.log('contro: ', eventsFromDB);
+     // console.log('contro: ', eventsFromDB);
       res.render("events/index", { eventList: eventsFromDB });
     })
     .catch((err) => next(err)); 
@@ -64,8 +64,20 @@ router.get('/events/:id', (req, res, next) => {
   Event.findByIdAndUpdate(eventId, {$push: {participants: userId}})
   .populate('participants')
   .then(eventFromDB => {
-    console.log('eventfromDB: ', eventFromDB)
-    res.render('events/eventDetails', {event: eventFromDB})
+  // console.log('eventfromDB: ', eventFromDB)
+   // console.log('participant number: ', eventFromDB.participants.length)
+    if(eventFromDB.capacity < 11 || eventFromDB.participants.length < 11){
+      for(let i=0; i < eventFromDB.participants.length; i++){
+        eventFromDB.capacity++
+      console.log(eventFromDB.capacity)
+    }
+    res.render('events/eventDetails', {event: eventFromDB});
+      return;
+      } else {
+        res.render('events/eventDetails', {message: 'Participants cannot be more than 10.'})
+        return;
+      }
+     
   })
   .catch(err => {
     next(err)
