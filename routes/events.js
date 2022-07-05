@@ -52,7 +52,7 @@ router.get("/events", (req, res, next) => {
       console.log('contro: ', eventsFromDB);
       res.render("events/index", { eventList: eventsFromDB });
     })
-    .catch((err) => next(err));
+    .catch((err) => next(err)); 
 });
 
 //GO TO JOIN PAGE
