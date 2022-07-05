@@ -10,14 +10,10 @@
     {{/each}}
     </ul>
 
-{{!--      <select name="participants">
-
-    
-      <option value="{{_id}}">{{username}}</option>
-    
-
-    </select> --}}
     {{!-- <a href="/events/{{id}}/edit">Edit the event</a> --}}
+
 {{/with}}
 
-
+{{#if message}}
+		<h3>{{message}}</h3>
+{{/if}}
