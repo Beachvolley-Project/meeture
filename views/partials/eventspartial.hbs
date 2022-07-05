@@ -1,0 +1,21 @@
+<div class="col-12 col-sm-6 col-md-4 mt-2">
+  <div
+    class="card border-success shadow p-3 mb-5 bg-body rounded"
+    style="width: 18rem;"
+  >
+    <!-- <img src="..." class="card-img-top" alt="..." /> -->
+    <div class="card-body">
+      <h5 class="card-title">Name: {{this.title}}</h5>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">Date: {{this.date}}</li>
+      <li class="list-group-item">Capacity: {{this.capacity}}</li>
+      <li class="list-group-item">Location: {{location.name}}</li>
+      <li class="list-group-item">Creator: {{creator.username}}</li>
+    </ul>
+    <div class="card-body">
+      <a class="btn btn-primary btn-large" href="/events/{{id}}">Join</a>
+
+    </div>
+  </div>
+</div>
