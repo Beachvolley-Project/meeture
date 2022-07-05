@@ -68,23 +68,17 @@ router.post("/login", (req, res, next) => {
         return;
       } else if (bcrypt.compareSync(password, user.password)) {
         req.session.currentUser = user; // SESSION
+        console.log(user);
         res.render("events", {
           // this has to be the event page
           user: user,
-        userInSession: req.session.currentUser,
+          userInSession: req.session.currentUser,
         });
       } else {
         res.render("login", { errorMessage: "Incorrect password." });
       }
     })
     .catch((error) => next(error));
-});
-
-router.post("/logout", (req, res, next) => {
-  req.session.destroy((err) => {
-    if (err) next(err);
-    res.redirect("/");
-  });
 });
 
 module.exports = router;
