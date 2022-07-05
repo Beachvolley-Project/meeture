@@ -24,6 +24,21 @@ const projectName = "Meeture";
 
 app.locals.appTitle = `${capitalized(projectName)}`;
 
+const session = require('express-session')
+const MongoStore = require('connect-mongo')
+
+app.use(
+	session({
+		secret: process.env.SESSION_SECRET,
+		cookie: { maxAge: 1000 * 60 * 60 * 24 },
+		resave: true,
+		saveUninitialized: true,
+		store: MongoStore.create({
+			mongoUrl: process.env.MONGODB_URI
+		})
+	})
+)
+
 // 👇 Start handling routes here
 const index = require("./routes/index.routes");
 app.use("/", index);

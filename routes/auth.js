@@ -44,6 +44,10 @@ router.post('/signup', isLoggedOut, (req, res, next) => {
       }
     });
   });
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
 
 router.get("/login", (req, res, next) => {
   res.render("login");
