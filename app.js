@@ -14,10 +14,15 @@ const mapbox = require("mapbox-gl");
 // https://www.npmjs.com/package/hbs
 const hbs = require("hbs");
 
+const path = require("path");
+
 const app = express();
 
 // ℹ️ This function is getting exported from the config folder. It runs most pieces of middleware
 require("./config")(app);
+
+app.set("view engine", "hbs");
+hbs.registerPartials(path.join(__dirname, "views/partials"));
 
 // default value for title local
 const capitalized = require("./utils/capitalized");
