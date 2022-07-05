@@ -14,7 +14,7 @@ const locationSchema = new Schema(
       required: true,
     },
     prices: {
-      type: Number
+      type: String
     },
     numberOfCourts: {
       type: Number,
