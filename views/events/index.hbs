@@ -3,10 +3,13 @@
 <ul>
   {{#each eventList}}
     <li>
-      <a href="events/{{id}}">
-        {{this.title}}
-      </a>
-
+      
+      Name: {{this.title}}
+      Date:  {{this.date}}
+      Capacity: {{this.capacity}}
+      Location:  {{location.name}}
+      Creator:  {{creator.username}}
+      <a href="">Join</a>
     </li>
 
   {{/each}}

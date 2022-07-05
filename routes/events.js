@@ -19,9 +19,6 @@ router.get("/events/new", (req, res, next) => {
   res.render("events/new");
 });
 
-router.get("/events", (req, res, next) => {
-  res.render("events");
-});
 
 // ADD II : POSTS THE ENTRIES TO EVENTS PAGE
 
@@ -38,7 +35,7 @@ router.post("/events", (req, res, next) => {
     creator: userId,
   })
     .then((newEvent) => {
-      console.log(newEvent);
+      //console.log(newEvent);
       res.redirect("events");
     })
     .catch((err) => {
@@ -49,8 +46,10 @@ router.post("/events", (req, res, next) => {
 // SHOWS THE EVENTS ON THE EVENTS PAGE
 router.get("/events", (req, res, next) => {
   Event.find()
+    .populate('creator')
+    .populate('location')
     .then((eventsFromDB) => {
-      console.log(eventsFromDB);
+      console.log('contro: ', eventsFromDB);
       res.render("events/index", { eventList: eventsFromDB });
     })
     .catch((err) => next(err));

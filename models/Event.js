@@ -29,7 +29,7 @@ const eventSchema = new Schema(
     },
     location: {
       type: Schema.Types.ObjectId,
-      ref: "Places",
+      ref: "Location",
     },
     creator: {
       type: Schema.Types.ObjectId,
