@@ -10,8 +10,19 @@ router.get("/events", (req, res, next) => {
     .populate("creator")
     .populate("location")
     .then((eventsFromDB) => {
-      console.log("contro: ", eventsFromDB);
-      res.render("events/index", { eventList: eventsFromDB });
+      // console.log("contro: ", eventsFromDB);
+      // const preview = eventsFromDB.map((event) =>
+      //   event.push({ day: event.date.toString() })
+      // );
+      const preview = eventsFromDB.map((event) => event.date.toString());
+      const day = preview.map((day) => day.slice(0, 15));
+      const hour = preview.map((day) => day.slice(16, 21));
+      console.log(hour);
+      res.render("events/index", {
+        eventList: eventsFromDB,
+        day: day,
+        hour: hour,
+      });
     })
     .catch((err) => next(err));
 });
@@ -84,20 +95,18 @@ router.post("/events/new", (req, res, next) => {
 router.get("/events/:id", (req, res, next) => {
   const eventId = req.params.id;
   const userId = req.session.currentUser._id;
-  console.log('userObject: ', userId)
+  console.log("userObject: ", userId);
   Event.findById(eventId)
-  .populate('participants')
-  .then(eventFromDb => {
-  eventFromDb.participants.push(userId)
-  eventFromDb.availableSlots = eventFromDb.availableSlots - 1
-  eventFromDb.save()
-  res.render('events/eventDetails', {event: eventFromDb});
-  })
-  .catch(err => {
-    next(err)
-  })
-})
-
-
+    .populate("participants")
+    .then((eventFromDb) => {
+      eventFromDb.participants.push(userId);
+      eventFromDb.availableSlots = eventFromDb.availableSlots - 1;
+      eventFromDb.save();
+      res.render("events/eventDetails", { event: eventFromDb });
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
 
 module.exports = router;
