@@ -4,7 +4,6 @@ require("dotenv/config");
 const token = process.env.TELEGRAMTOKEN;
 // read the doc from https://github.com/yagop/node-telegram-bot-api to know how to catch the chatId
 const chatId = process.env.CHATID;
-console.log('this is the token: ', token)
 
 const bot = new TelegramBot(token, { polling: false });
 
