@@ -1,13 +1,13 @@
-<h1>Login</h1>
-<form action="/events" method="POST">
-  <label for="username">Username: </label>
-  <input type="text" name="username" />
-  <label for="password">Password: </label>
-  <input type="password" name="password" />
-  <button type="submit">Login</button>
-  {{#if message}}
-    <p>{{message}}</p>
-  {{/if}}
-</form>
-
-<a href="/"><button>Home</button></a>
+<main class="container">
+  <h1>Login</h1>
+  <form action="/events" method="POST">
+    <label for="username">Username: </label>
+    <input type="text" name="username" />
+    <label for="password">Password: </label>
+    <input type="password" name="password" />
+    <button type="submit" class="btn btn-primary mx-2">Log In</button>
+    {{#if message}}
+      <p>{{message}}</p>
+    {{/if}}
+  </form>
+</main>

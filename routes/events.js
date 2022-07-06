@@ -10,8 +10,19 @@ router.get("/events", (req, res, next) => {
     .populate("creator")
     .populate("location")
     .then((eventsFromDB) => {
-      console.log("contro: ", eventsFromDB);
-      res.render("events/index", { eventList: eventsFromDB });
+      // console.log("contro: ", eventsFromDB);
+      // const preview = eventsFromDB.map((event) =>
+      //   event.push({ day: event.date.toString() })
+      // );
+      const preview = eventsFromDB.map((event) => event.date.toString());
+      const day = preview.map((day) => day.slice(0, 15));
+      const hour = preview.map((day) => day.slice(16, 21));
+      console.log(hour);
+      res.render("events/index", {
+        eventList: eventsFromDB,
+        day: day,
+        hour: hour,
+      });
     })
     .catch((err) => next(err));
 });
@@ -54,6 +65,7 @@ router.post("/events/new", (req, res, next) => {
     title: title,
     date: date,
     capacity: capacity,
+    availableSlots: capacity,
     location: location,
     creator: userId,
   })
@@ -84,24 +96,13 @@ router.get("/events/:id", (req, res, next) => {
   const eventId = req.params.id;
   const userId = req.session.currentUser._id;
   console.log("userObject: ", userId);
-  Event.findByIdAndUpdate(eventId, { $push: { participants: userId } })
+  Event.findById(eventId)
     .populate("participants")
-    .then((eventFromDB) => {
-      // console.log('eventfromDB: ', eventFromDB)
-      // console.log('participant number: ', eventFromDB.participants.length)
-      if (eventFromDB.capacity < 11 || eventFromDB.participants.length < 11) {
-        for (let i = 0; i < eventFromDB.participants.length; i++) {
-          eventFromDB.capacity++;
-          console.log(eventFromDB.capacity);
-        }
-        res.render("events/eventDetails", { event: eventFromDB });
-        return;
-      } else {
-        res.render("events/eventDetails", {
-          message: "Participants cannot be more than 10.",
-        });
-        return;
-      }
+    .then((eventFromDb) => {
+      eventFromDb.participants.push(userId);
+      eventFromDb.availableSlots = eventFromDb.availableSlots - 1;
+      eventFromDb.save();
+      res.render("events/eventDetails", { event: eventFromDb });
     })
     .catch((err) => {
       next(err);
