@@ -31,6 +31,7 @@ router.post("/events", (req, res, next) => {
     title: title,
     date: date,
     capacity: capacity,
+    availableSlots: capacity,
     location: location,
     creator: userId,
   })
@@ -61,27 +62,19 @@ router.get('/events/:id', (req, res, next) => {
   const eventId = req.params.id;
   const userId = req.session.currentUser._id;
   console.log('userObject: ', userId)
-  Event.findByIdAndUpdate(eventId, {$push: {participants: userId}})
+  Event.findById(eventId)
   .populate('participants')
-  .then(eventFromDB => {
-  // console.log('eventfromDB: ', eventFromDB)
-   // console.log('participant number: ', eventFromDB.participants.length)
-    if(eventFromDB.capacity < 11 || eventFromDB.participants.length < 11){
-      for(let i=0; i < eventFromDB.participants.length; i++){
-        eventFromDB.capacity++
-      console.log(eventFromDB.capacity)
-    }
-    res.render('events/eventDetails', {event: eventFromDB});
-      return;
-      } else {
-        res.render('events/eventDetails', {message: 'Participants cannot be more than 10.'})
-        return;
-      }
-     
+  .then(eventFromDb => {
+  eventFromDb.participants.push(userId)
+  eventFromDb.availableSlots = eventFromDb.availableSlots - 1
+  eventFromDb.save()
+  res.render('events/eventDetails', {event: eventFromDb});
   })
   .catch(err => {
     next(err)
   })
 })
+
+
 
 module.exports = router;

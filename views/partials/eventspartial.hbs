@@ -11,11 +11,17 @@
       <li class="list-group-item">Date: {{this.date}}</li>
       <li class="list-group-item">Capacity: {{this.capacity}}</li>
       <li class="list-group-item">Location: {{location.name}}</li>
+      <li class="list-group-item">Available Slots: {{this.availableSlots}}</li>
       <li class="list-group-item">Creator: {{creator.username}}</li>
+    
     </ul>
+
+    {{#if (isZero this.availableSlots)}}
+    <p>There is no available slots :/</p>
+    {{else}}
     <div class="card-body">
       <a class="btn btn-primary btn-large" href="/events/{{id}}">Join</a>
-
     </div>
+    {{/if}}
   </div>
 </div>
