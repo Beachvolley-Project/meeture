@@ -18,11 +18,17 @@ router.get("/events", (req, res, next) => {
       const preview = eventsFromDB.map((event) => event.date.toString());
       const day = preview.map((day) => day.slice(0, 15));
       const hour = preview.map((day) => day.slice(16, 21));
-      //console.log(hour);
+      let eventos = [];
+      for (let i = 0; i < eventsFromDB.length; i++) {
+        eventos.push({
+          events: eventsFromDB[i],
+          day: day[i],
+          hour: hour[i],
+        });
+      }
+      console.log(eventos);
       res.render("events/index", {
-        eventList: eventsFromDB,
-        day: day,
-        hour: hour,
+        eventList: eventos,
       });
     })
     .catch((err) => next(err));
@@ -33,7 +39,7 @@ router.post("/events", (req, res, next) => {
     .populate("creator")
     .populate("location")
     .then((eventsFromDB) => {
-     // console.log("contro: ", eventsFromDB);
+      // console.log("contro: ", eventsFromDB);
       res.render("events/index", { eventList: eventsFromDB });
     })
     .catch((err) => next(err));
@@ -43,7 +49,7 @@ router.post("/events", (req, res, next) => {
 router.get("/events/new", (req, res, next) => {
   Location.find()
     .then((locationFromDb) => {
-      telegrambot('helloooo');
+      telegrambot("helloooo");
       res.render("events/new", { locationList: locationFromDb });
     })
     .catch((err) => {
@@ -72,16 +78,14 @@ router.post("/events/new", (req, res, next) => {
     creator: userId,
   })
     .then((newEvent) => {
-      telegrambot("Helllooo");
       //console.log(newEvent);
-      telegrambot('helloooo');
+      // telegrambot("helloooo");
       res.redirect("/events");
     })
     .catch((err) => {
       res.redirect("/events");
     });
 });
-
 
 //GO TO JOIN PAGE
 
