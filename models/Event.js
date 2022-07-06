@@ -22,6 +22,9 @@ const eventSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "User"
     }],
+    availableSlots: {
+      type: Number
+    },
     location: {
       type: Schema.Types.ObjectId,
       ref: "Location",

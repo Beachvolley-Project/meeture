@@ -13,6 +13,10 @@ const mapbox = require("mapbox-gl");
 // Handles the handlebars
 // https://www.npmjs.com/package/hbs
 const hbs = require("hbs");
+hbs.registerHelper("isZero", function(value) {
+  return value === 0
+});
+
 
 const path = require("path");
 
