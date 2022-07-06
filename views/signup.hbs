@@ -1,20 +1,22 @@
-<h1>Sign Up</h1>
-<form action="/signup" method="POST">
-	<label for="">Name: </label>
-	<input type="text" name="username">
+<main class="container">
+  <h1>Sign Up</h1>
+  <form action="/signup" method="POST">
+    <label for="">Name: </label>
+    <input type="text" name="username" />
 
-	<label for="">Email: </label>
-	<input type="text" name="email">
+    <label for="">Email: </label>
+    <input type="text" name="email" />
 
     <label for="">Phone Number</label>
-    <input type="number" name="phoneNumber" id="">
+    <input type="number" name="phoneNumber" id="" />
 
-	<label for="">Password: </label>
-	<input type="password" name="password">
+    <label for="">Password: </label>
+    <input type="password" name="password" />
 
-	<button type="submit">Sign Up</button>
+    <button type="submit" class="btn btn-primary mx-2">Sign Up</button>
 
-	{{#if message}}
-		<h3>{{message}}</h3>
-	{{/if}}
-</form>
+    {{#if message}}
+      <h3>{{message}}</h3>
+    {{/if}}
+  </form>
+</main>

@@ -9,19 +9,24 @@
     </div>
     <ul class="list-group list-group-flush">
       <li class="list-group-item">Date: {{this.date}}</li>
+      {{!-- <li class="list-group-item">Prices: {{location.prices}}</li> --}}
       <li class="list-group-item">Capacity: {{this.capacity}}</li>
       <li class="list-group-item">Location: {{location.name}}</li>
+      {{!-- <li class="list-group-item">Location: {{location.address}}</li> --}}
       <li class="list-group-item">Available Slots: {{this.availableSlots}}</li>
       <li class="list-group-item">Creator: {{creator.username}}</li>
-    
+
     </ul>
 
     {{#if (isZero this.availableSlots)}}
-    <p>There is no available slots :/</p>
+      <p>There is no available slots :/</p>
     {{else}}
-    <div class="card-body">
-      <a class="btn btn-primary btn-large" href="/events/{{id}}">Join</a>
-    </div>
+      <div class="card-body">
+        <a class="btn btn-primary btn-large" href="/events/{{id}}">Join</a>
+      </div>
     {{/if}}
+    {{!-- <li class="list-group-item">Date: {{this.date}}</li>
+    <li class="list-group-item">Day: {{this.day}}</li>
+    <li class="list-group-item">Hour: {{hour}}</li> --}}
   </div>
 </div>

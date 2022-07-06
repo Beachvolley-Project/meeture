@@ -1,21 +1,20 @@
 {{#with event}}
-    <h2>Event Information</h2>
-    <ul>
+  <h2>Event Information</h2>
+  <ul>
     <li>Title: {{title}}</li>
-    <li>Date:  {{date}}</li>
+    <li>Date: {{date}}</li>
     <li>Capacity: {{capacity}}</li>
     <p>Participants:</p>
     {{#each participants}}
-     <li> {{username}}</li>
+      <li> {{username}}</li>
     {{/each}}
-    </ul>
-    <p>Available slots:</p>
-    <p>{{availableSlots}}</p>
-    {{!-- <a href="/events/{{id}}/edit">Edit the event</a> --}}
+  </ul>
+  <p>Available slots:</p>
+  <p>{{availableSlots}}</p>
+  {{!-- <a href="/events/{{id}}/edit">Edit the event</a> --}}
 
 {{/with}}
 
-
 {{#if message}}
-		<h3>{{message}}</h3>
+  <h3>{{message}}</h3>
 {{/if}}

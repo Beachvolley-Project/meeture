@@ -1,22 +1,8 @@
+<div class="container">
 <h1>Events List</h1>
 
-{{!-- <ul>
-  {{#each eventList}}
-    <li>
-      
-      Name: {{this.title}}
-      Date:  {{this.date}}
-      Capacity: {{this.capacity}}
-      Location:  {{location.name}}
-      Creator:  {{creator.username}}
-      <a href="/events/{{id}}">Join</a>
-    </li>
-
-  {{/each}}
-</ul> --}}
-
 <a href="/events/new">Create an Event</a>
-
+</div>
 
 <main
   class='container text-center d-flex flex-column alto justify-content-center  mt-4'
@@ -26,6 +12,7 @@
 {{#each eventList}}
     {{> eventspartial}}
 {{/each}}
+
 
   </div>
 </main>
