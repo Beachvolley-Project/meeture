@@ -10,16 +10,25 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
-      crossorigin="anonymous"
-    />
+      crossorigin="anonymous"/>
     <link rel="stylesheet" href="/stylesheets/style.css" />
-    <script
-      src="https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js"
-    ></script>
-    <link
-      href="https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css"
-      rel="stylesheet"
-    />
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css" rel="stylesheet"/>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+      <div id="g_id_onload"
+         data-client_id="321162226361-3lt66a88tl8a03dj3cabjakfjdsj47h9.apps.googleusercontent.com"
+         data-login_uri="http://localhost:3000/events"
+         {{!-- data-auto_prompt="false"> --}}
+      </div>
+      <div class="g_id_signin"
+         data-type="standard"
+         data-size="large"
+         data-theme="outline"
+         data-text="sign_in_with"
+         data-shape="rectangular"
+         data-logo_alignment="left">
+      </div>
   </head>
 
   <body>
@@ -40,15 +49,13 @@
           </button>
           <div
             class="collapse navbar-collapse justify-content-end"
-            id="navbarNav"
-          >
+            id="navbarNav">
             <ul class="navbar-nav">
               <li class="nav-item">
                 <a
                   class="nav-link text-white active"
                   aria-current="page"
-                  href="/"
-                >Home</a>
+                  href="/">Home</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link text-white" href="/signup">Sign Up</a>
