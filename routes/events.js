@@ -18,7 +18,7 @@ router.get("/events", (req, res, next) => {
       const preview = eventsFromDB.map((event) => event.date.toString());
       const day = preview.map((day) => day.slice(0, 15));
       const hour = preview.map((day) => day.slice(16, 21));
-      console.log(hour);
+      //console.log(hour);
       res.render("events/index", {
         eventList: eventsFromDB,
         day: day,
@@ -33,7 +33,7 @@ router.post("/events", (req, res, next) => {
     .populate("creator")
     .populate("location")
     .then((eventsFromDB) => {
-      console.log("contro: ", eventsFromDB);
+     // console.log("contro: ", eventsFromDB);
       res.render("events/index", { eventList: eventsFromDB });
     })
     .catch((err) => next(err));
@@ -43,6 +43,7 @@ router.post("/events", (req, res, next) => {
 router.get("/events/new", (req, res, next) => {
   Location.find()
     .then((locationFromDb) => {
+      telegrambot('helloooo');
       res.render("events/new", { locationList: locationFromDb });
     })
     .catch((err) => {
@@ -73,6 +74,7 @@ router.post("/events/new", (req, res, next) => {
     .then((newEvent) => {
       telegrambot("Helllooo");
       //console.log(newEvent);
+      telegrambot('helloooo');
       res.redirect("/events");
     })
     .catch((err) => {
@@ -80,17 +82,6 @@ router.post("/events/new", (req, res, next) => {
     });
 });
 
-// // SHOWS THE EVENTS ON THE EVENTS PAGE
-// router.get("/events", (req, res, next) => {
-//   Event.find()
-//     .populate("creator")
-//     .populate("location")
-//     .then((eventsFromDB) => {
-//       // console.log('contro: ', eventsFromDB);
-//       res.render("events/index", { eventList: eventsFromDB });
-//     })
-//     .catch((err) => next(err));
-// });
 
 //GO TO JOIN PAGE
 
