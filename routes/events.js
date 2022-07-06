@@ -2,7 +2,7 @@ const router = require("express").Router();
 const Event = require("../models/Event");
 const Location = require("../models/Location");
 const { isLoggedOut, isLoggedIn } = require("../middleware/route-guard");
-const telegrambot = require('../telegram-notify')
+const telegrambot = require("../telegram-notify");
 
 // SHOWS THE EVENTS ON THE EVENTS PAGE
 
@@ -71,6 +71,7 @@ router.post("/events/new", (req, res, next) => {
     creator: userId,
   })
     .then((newEvent) => {
+      telegrambot("Helllooo");
       //console.log(newEvent);
       res.redirect("/events");
     })
