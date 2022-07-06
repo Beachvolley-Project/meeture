@@ -22,8 +22,7 @@ router.post("/signup", isLoggedOut, (req, res, next) => {
   if (password.length === "") {
     res.render("signup", { message: "Password cannot be empty" });
   }
-  User.findOne({ username: username })
-  .then((userFromDB) => {
+  User.findOne({ username: username }).then((userFromDB) => {
     if (userFromDB !== null) {
       res.render("signup", { message: "The username is already taken" });
       return;
