@@ -1,31 +1,56 @@
-{{#with event}}
-  <h2>Event Details</h2>
-  <ul>
-    <li>Title: {{title}}</li>
-    <li>Date: {{date}}</li>
-    <li>Capacity: {{capacity}}</li>
-    <li>Location: {{location.name}}</li>
-    <p>Participants:</p>
-    {{#each participants}}
-      <li> {{username}}</li>
-    {{/each}}
+<div class="container col-5 mt-5">
+    <div
+      class="card border-secondary shadow mb-5 bg-body rounded align-items-center p-2"
+    
+    >
+      {{#with event}}
+        <div class="card-body">
+          <h2 class="card-title">Event Details</h2>
+        </div>
+
+  <ul class="list-group list-group-flush text-center">
+    <li class="list-group-item"><strong>Title:</strong> {{title}}</li>
+    <li class="list-group-item"><strong>Date:</strong> {{date}}</li>
+    <li class="list-group-item"><strong>Capacity:</strong> {{capacity}}</li>
+    <li class="list-group-item"><strong>Location:</strong> {{location.name}}</li>  
   </ul>
-  
-  <p>Available slots:</p>
-  <p>{{availableSlots}}</p>
-  {{!-- <a href="/events/{{id}}/edit">Edit the event</a> --}}
-  {{!-- <form action="/events/{{id}}"><button class="btn btn-primary">Join</button></form> --}}
-  <a href="/events/{{id}}/edit">Edit the event</a>
 
-    <form action="/events/{{id}}/delete" method="post">
-    <button type="submit">Delete the Event</button>
-   </form>
-{{/with}}
+        {{!-- <p>Title: {{title}}</p>
+        <p>Date: {{date}}</p>
+        <p>Capacity: {{capacity}}</p> --}}
+        {{!-- <p>Location: {{location.name}}</p> --}}
+        <div class="card-body">
+          <h3 class="card-title">Participants:</h3>
+        </div>
+      <ol>
+        {{#each participants}}
+          
+          <li class="list-group-item">{{username}}</li>  
 
+        {{/each}}
+      </ol>
 
+        <h5>Available slots: {{availableSlots}}</h5>
+        {{!-- <a href="/events/{{id}}/edit">Edit the event</a> --}}
+        {{!-- <form action="/events/{{id}}"><button class="btn btn-primary">Join</button></form> --}}
+      <div class="col-10">   
+        <div class="col">   
+        <a class="btn btn-primary col-12 mb-2" href="/events/{{id}}/edit">Edit
+          the event</a>
+        <form action="/events/{{id}}/delete" method="post" >
+          <button type="submit" class="btn btn-danger col-12 mb-2" >Delete the
+            Event</button>
+        </form>
+        </div>
+      </div> 
+      {{/with}}
 
-<a href="/events">Go back to Events Page</a>
+      <a href="/events" class="btn btn-primary col-10 mb-2">Go back to Events
+        Page</a>
 
-{{#if message}}
-  <h3>{{message}}</h3>
-{{/if}}
+      {{#if message}}
+        <h3>{{message}}</h3>
+      {{/if}}
+    </div>
+  </div>
+</div>
