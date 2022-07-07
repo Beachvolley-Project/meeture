@@ -74,7 +74,7 @@ router.post("/events/new", (req, res, next) => {
   })
     .then((newEvent) => {
       //console.log(newEvent);
-      telegrambot("A new beachvolley event is created!");
+      telegrambot("A new beachvolley event is created! Check the website out!");
       res.redirect("/events");
     })
     .catch((err) => {
