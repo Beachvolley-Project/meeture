@@ -1,14 +1,14 @@
 const router = require("express").Router();
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
-const { isLoggedOut } = require("../middleware/route-guard");
+const { isLoggedIn, isLoggedOut } = require("../middleware/route-guard");
 const saltRounds = 10;
 
-router.get("/signup", isLoggedOut, (req, res, next) => {
+router.get("/signup", /* isLoggedOut, */ (req, res, next) => {
   res.render("signup");
 });
 
-router.post("/signup", isLoggedOut, (req, res, next) => {
+router.post("/signup", /* isLoggedOut, */ (req, res, next) => {
   const { username, email, /* phoneNumber, */ password } = req.body;
   if (password.length < 4) {
     res.render("signup", {
@@ -84,7 +84,7 @@ router.post("/login", (req, res, next) => {
 });
 
 //we have to make a POST request to /logout route
-router.post("/logout", (req, res, next) => {
+router.post("/logout", isLoggedIn, (req, res, next) => {
   req.session.destroy((err) => {
     if (err) next(err);
     res.redirect("/");
