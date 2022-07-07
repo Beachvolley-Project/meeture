@@ -1,12 +1,14 @@
 const router = require("express").Router();
 const Event = require("../models/Event");
 const Location = require("../models/Location");
-const { isLoggedOut, isLoggedIn } = require("../middleware/route-guard");
+/* const { isLoggedOut, isLoggedIn } = require("../middleware/route-guard"); */
 const telegrambot = require("../telegram-notify");
 
+
+   
 // SHOWS THE EVENTS ON THE EVENTS PAGE
 
-router.get("/events", (req, res, next) => {
+router.get("/events", /* isLoggedIn, */ (req, res, next) => {
   Event.find()
     .populate("creator")
     .populate("location")
@@ -90,12 +92,13 @@ router.get("/events/:id", (req, res, next) => {
   console.log("userObject: ", userId);
   Event.findById(eventId)
     .populate("participants")
+    .populate('location')
     .then((eventFromDb) => {
-      console.log(eventFromDb.participants)
+      console.log('eventFromDb: ', eventFromDb)
       eventFromDb.participants.push(userId);
       eventFromDb.availableSlots = eventFromDb.availableSlots - 1;
       eventFromDb.save();
-      res.render("events/eventDetails", { event: eventFromDb });
+      res.render("events/eventDetails", { event: eventFromDb});
     })
     .catch((err) => {
       next(err);
@@ -125,7 +128,10 @@ router.get('/events/:id/edit',(req, res, next) => {
 	Event.findById(eventId)
 	.then(eventFromDB => {
 		//console.log(eventFromDB)
-    res.render('events/edit', {event: eventFromDB})
+    Location.find()
+    .then(locationsFromDB => {
+      res.render('events/edit', {event: eventFromDB, locationList: locationsFromDB})
+    })
 	})
 	.catch(err => {
 		next(err);
@@ -135,8 +141,8 @@ router.get('/events/:id/edit',(req, res, next) => {
 router.post('/events/:id/edit', (req, res, next) => {
 	const eventId = req.params.id;
   console.log('try: ', req.body)
-	const { title, date, capacity, participants, availableSlots } = req.body;
-	Event.findByIdAndUpdate(eventId, { title, date, capacity, participants, availableSlots } )
+	const { title, date, capacity, location, participants, availableSlots } = req.body;
+	Event.findByIdAndUpdate(eventId, { title, date, capacity, location, participants, availableSlots } )
 	.then(()=> {
 		res.redirect('/events');
 	})

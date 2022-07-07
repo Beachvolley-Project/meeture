@@ -10,10 +10,11 @@
     <label for="capacity">Capacity: </label>
     <input type="text" value="{{event.capacity}}" name="capacity">
 
+    <select name="location">
     {{#each locationList}}
       <option value="{{_id}}">{{name}}</option>
     {{/each}}
-
+    </select>
 {{!--     {{#each participants}}
     <label for="participants">Participants: </label>
     <input type="text" value="{{event.participants.username}}" name="participants">
