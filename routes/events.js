@@ -11,13 +11,9 @@ router.get("/events", (req, res, next) => {
     .populate("creator")
     .populate("location")
     .then((eventsFromDB) => {
-      // console.log("contro: ", eventsFromDB);
-      // const preview = eventsFromDB.map((event) =>
-      //   event.push({ day: event.date.toString() })
-      // );
       const preview = eventsFromDB.map((event) => event.date.toString());
       const day = preview.map((day) => day.slice(0, 15));
-      const hour = preview.map((day) => day.slice(16, 21));
+      const hour = preview.map((hour) => hour.slice(16, 21));
       let eventos = [];
       for (let i = 0; i < eventsFromDB.length; i++) {
         eventos.push({

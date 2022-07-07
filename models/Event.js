@@ -18,12 +18,14 @@ const eventSchema = new Schema(
     capacity: {
       type: Number,
     },
-    participants: [{
-      type: Schema.Types.ObjectId,
-      ref: "User"
-    }],
+    participants: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+      },
+    ],
     availableSlots: {
-      type: Number
+      type: Number,
     },
     location: {
       type: Schema.Types.ObjectId,
@@ -38,7 +40,6 @@ const eventSchema = new Schema(
     timestamps: true,
   }
 );
-
 
 const Event = model("Event", eventSchema);
 
