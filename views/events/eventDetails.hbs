@@ -4,11 +4,13 @@
     <li>Title: {{title}}</li>
     <li>Date: {{date}}</li>
     <li>Capacity: {{capacity}}</li>
+    <li>Location: {{location.name}}</li>
     <p>Participants:</p>
     {{#each participants}}
       <li> {{username}}</li>
     {{/each}}
   </ul>
+  
   <p>Available slots:</p>
   <p>{{availableSlots}}</p>
   {{!-- <a href="/events/{{id}}/edit">Edit the event</a> --}}
