@@ -91,6 +91,7 @@ router.get("/events/:id", (req, res, next) => {
   Event.findById(eventId)
     .populate("participants")
     .then((eventFromDb) => {
+      console.log(eventFromDb.participants)
       eventFromDb.participants.push(userId);
       eventFromDb.availableSlots = eventFromDb.availableSlots - 1;
       eventFromDb.save();
@@ -100,5 +101,22 @@ router.get("/events/:id", (req, res, next) => {
       next(err);
     });
 });
+
+/* router.post('/events/:id', (req, res, next) => {
+  const eventId = req.params.id;
+  const userId = req.session.currentUser._id;
+  Event.findByIdAndUpdate(eventId)
+  .populate("participants")
+  .then((eventFromDb) => {
+    console.log(eventFromDb.participants)
+    eventFromDb.participants.push(userId);
+    eventFromDb.availableSlots = eventFromDb.availableSlots - 1;
+    eventFromDb.save();
+    res.render("events/eventDetails", { event: eventFromDb });
+  })
+  .catch((err) => {
+    next(err);
+  });
+}) */
 
 module.exports = router;
