@@ -20,7 +20,7 @@
 
     </ul>
 
-    {{#if (isZero this.availableSlots)}}
+    {{#if (isZero events.availableSlots)}}
       <p>There is no available slots :/</p>
     {{else}}
       <div class="card-body">
@@ -30,8 +30,5 @@
         >Join</a>
       </div>
     {{/if}}
-    {{!-- <li class="list-group-item">Date: {{this.date}}</li>
-    <li class="list-group-item">Day: {{this.day}}</li> --}}
-    {{!-- <li class="list-group-item">Hour: {{hour}}</li> --}}
   </div>
 </div>
