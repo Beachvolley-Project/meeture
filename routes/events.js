@@ -49,7 +49,6 @@ router.post("/events", (req, res, next) => {
 router.get("/events/new", (req, res, next) => {
   Location.find()
     .then((locationFromDb) => {
-      telegrambot("helloooo");
       res.render("events/new", { locationList: locationFromDb });
     })
     .catch((err) => {
@@ -79,7 +78,7 @@ router.post("/events/new", (req, res, next) => {
   })
     .then((newEvent) => {
       //console.log(newEvent);
-      // telegrambot("helloooo");
+      telegrambot("A new beachvolley event is created! Check the website out!");
       res.redirect("/events");
     })
     .catch((err) => {
