@@ -22,7 +22,7 @@ router.get("/events", (req, res, next) => {
           hour: hour[i],
         });
       }
-     // console.log(eventos);
+      // console.log(eventos);
       res.render("events/index", {
         eventList: eventos,
       });

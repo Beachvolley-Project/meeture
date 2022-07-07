@@ -24,7 +24,10 @@
       <p>There is no available slots :/</p>
     {{else}}
       <div class="card-body">
-        <a class="btn btn-primary btn-large" href="/events/{{id}}">Join</a>
+        <a
+          class="btn btn-primary btn-large"
+          href="/events/{{events.id}}"
+        >Join</a>
       </div>
     {{/if}}
     {{!-- <li class="list-group-item">Date: {{this.date}}</li>
