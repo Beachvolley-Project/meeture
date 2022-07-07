@@ -1,32 +1,34 @@
-<div class="col-12 col-sm-6 col-md-4 mt-2">
+<div class="col-12 col-md-6 col-lg-4 mt-2">
   <div
-    class="card border-success shadow p-3 mb-5 bg-body rounded"
+    class="card border-secondary shadow mb-5 bg-body rounded"
     style="width: 18rem;"
   >
     <!-- <img src="..." class="card-img-top" alt="..." /> -->
     <div class="card-body">
-      <h5 class="card-title">Name: {{this.title}}</h5>
+      <h5 class="card-title">Name: {{events.title}}</h5>
     </div>
     <ul class="list-group list-group-flush">
-      <li class="list-group-item">Date: {{this.date}}</li>
+      <li class="list-group-item">Day: {{day}}</li>
+      <li class="list-group-item">Hour: {{hour}}</li>
       {{!-- <li class="list-group-item">Prices: {{location.prices}}</li> --}}
-      <li class="list-group-item">Capacity: {{this.capacity}}</li>
-      <li class="list-group-item">Location: {{location.name}}</li>
+      <li class="list-group-item">Capacity: {{events.capacity}}</li>
+      <li class="list-group-item">Location: {{events.location.name}}</li>
       {{!-- <li class="list-group-item">Location: {{location.address}}</li> --}}
-      <li class="list-group-item">Available Slots: {{this.availableSlots}}</li>
-      <li class="list-group-item">Creator: {{creator.username}}</li>
+      <li class="list-group-item">Available Slots:
+        {{events.availableSlots}}</li>
+      <li class="list-group-item">Creator: {{events.creator.username}}</li>
 
     </ul>
 
-    {{#if (isZero this.availableSlots)}}
+    {{#if (isZero events.availableSlots)}}
       <p>There is no available slots :/</p>
     {{else}}
       <div class="card-body">
-        <a class="btn btn-primary btn-large" href="/events/{{id}}">Join</a>
+        <a
+          class="btn btn-primary btn-large"
+          href="/events/{{events.id}}"
+        >Join</a>
       </div>
     {{/if}}
-    {{!-- <li class="list-group-item">Date: {{this.date}}</li>
-    <li class="list-group-item">Day: {{this.day}}</li>
-    <li class="list-group-item">Hour: {{hour}}</li> --}}
   </div>
 </div>

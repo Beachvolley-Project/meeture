@@ -1,4 +1,5 @@
-const isLoggedIn = (req, res, next) => {
+/* const isLoggedIn = (req, res, next) => {
+  console.log('hello')
     if (!req.session.user) {
       return res.redirect('/login');
     }
@@ -15,4 +16,4 @@ const isLoggedIn = (req, res, next) => {
   module.exports = {
     isLoggedIn,
     isLoggedOut
-  };
+  }; */

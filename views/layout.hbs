@@ -6,21 +6,33 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
     <title>{{appTitle}}</title>
+    <link rel="icon" type="image/x-icon" href="/images/favicon-app.ico" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
-      crossorigin="anonymous"/>
+      crossorigin="anonymous"
+    />
+
     <link rel="stylesheet" href="/stylesheets/style.css" />
-    <script src="https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js"></script>
-    <link href="https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css" rel="stylesheet"/>
+    {{! <style>
+      @import
+      url('https://fonts.googleapis.com/css2?family=Caveat+Brush&family=Lato&family=Roboto:wght@300;400&display=swap');
+    </style> }}
+
+    <script
+      src="https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js"
+    ></script>
+    <link
+      href="https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css"
+      rel="stylesheet"
+    />
     <script src="https://accounts.google.com/gsi/client" async defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.min.js" integrity="sha512-xIPqqrfvUAc/Cspuj7Bq0UtHNo/5qkdyngx6Vwt+tmbvTLDszzXM0G6c91LXmGrRx8KEPulT+AfOOez+TeVylg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
       <div id="g_id_onload"
          data-client_id="321162226361-3lt66a88tl8a03dj3cabjakfjdsj47h9.apps.googleusercontent.com"
-         data-login_uri="http://localhost:3000/events"
-         {{!-- data-auto_prompt="false"> --}}
-      </div>
+         data-login_uri="http://localhost:3000/events"></div>
+
       <div class="g_id_signin"
          data-type="standard"
          data-size="large"
@@ -29,13 +41,23 @@
          data-shape="rectangular"
          data-logo_alignment="left">
       </div>
+
   </head>
 
   <body>
     <header>
-      <nav class="navbar navbar-expand-lg bg-primary">
+      <nav class="navbar navbar-expand-lg bg-meeture shadow p-0 m-0">
         <div class="container">
-          <a class="navbar-brand" href="#">Meeture</a>
+          <img
+            class=""
+            src="/images/logo2.png"
+            alt="logo meeture"
+            height="60"
+          />
+          <h2
+            class="navbar-brand text-white mx-2 fs-1 text-logo"
+            href="#"
+          >Meeture</h2>
           <button
             class="navbar-toggler"
             type="button"
@@ -49,13 +71,15 @@
           </button>
           <div
             class="collapse navbar-collapse justify-content-end"
-            id="navbarNav">
+            id="navbarNav"
+          >
             <ul class="navbar-nav">
               <li class="nav-item">
                 <a
                   class="nav-link text-white active"
                   aria-current="page"
-                  href="/">Home</a>
+                  href="/"
+                >Home</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link text-white" href="/signup">Sign Up</a>
@@ -67,7 +91,9 @@
                 <a class="nav-link text-white" href="/events">Events</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-white" href="/">Log Out</a>
+                <form id="logout-form" action="/logout" method="POST">
+                  <a class="nav-link text-white" href="/">Log Out</a>
+                </form>
               </li>
             </ul>
           </div>
@@ -76,14 +102,6 @@
     </header>
 
     {{{body}}}
-    <div>
-      
-      <div
-        id="map"
-        class="container mt-5"
-        style="width: 60%; height: 50%"
-      ></div>
-    </div>
 
     <script src="/js/script.js"></script>
     <script
