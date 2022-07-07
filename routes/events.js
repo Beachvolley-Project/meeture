@@ -119,4 +119,41 @@ router.get("/events/:id", (req, res, next) => {
   });
 }) */
 
+router.get('/events/:id/edit',(req, res, next) => {
+	const eventId = req.params.id;
+	//console.log(req.params)
+	Event.findById(eventId)
+	.then(eventFromDB => {
+		//console.log(eventFromDB)
+    res.render('events/edit', {event: eventFromDB})
+	})
+	.catch(err => {
+		next(err);
+	})
+})
+
+router.post('/events/:id/edit', (req, res, next) => {
+	const eventId = req.params.id;
+  console.log('try: ', req.body)
+	const { title, date, capacity, participants, availableSlots } = req.body;
+	Event.findByIdAndUpdate(eventId, { title, date, capacity, participants, availableSlots } )
+	.then(()=> {
+		res.redirect('/events');
+	})
+	.catch(err => {
+		next(err);
+	})
+})
+
+router.post('/events/:id/delete', (req, res, next) => {
+	const eventId = req.params.id;
+	Event.findByIdAndRemove(eventId)
+	.then(deletedEvent => {
+		res.redirect('/events');
+	})
+	.catch(err => {
+		next(err);
+	})
+})
+
 module.exports = router;

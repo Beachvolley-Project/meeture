@@ -13,7 +13,16 @@
   <p>{{availableSlots}}</p>
   {{!-- <a href="/events/{{id}}/edit">Edit the event</a> --}}
   {{!-- <form action="/events/{{id}}"><button class="btn btn-primary">Join</button></form> --}}
+  <a href="/events/{{id}}/edit">Edit the event</a>
+
+    <form action="/events/{{id}}/delete" method="post">
+    <button type="submit">Delete the Event</button>
+   </form>
 {{/with}}
+
+
+
+<a href="/events">Go back to Events Page</a>
 
 {{#if message}}
   <h3>{{message}}</h3>
