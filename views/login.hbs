@@ -1,13 +1,52 @@
 <main class="container">
-  <h1>Login</h1>
-  <form action="/login" method="POST">
-    <label for="username">Username: </label>
-    <input type="text" name="username" />
-    <label for="password">Password: </label>
-    <input type="password" name="password" />
-    <button type="submit" class="btn btn-primary mx-2">Log In</button>
-    {{#if message}}
-      <p>{{message}}</p>
-    {{/if}}
-  </form>
+  <div class="container col-12 col-md-6 col-lg-4">
+    <div class="card my-2 shadow">
+      <div class="row align-items-center p-2">
+        <div class="col-12 d-block mb-3">
+          <h2 class="card-title text-center">Log In</h2>
+        </div>
+        <form action="/login" method="POST">
+          <div>
+            <label class="col-12 mb-3" for="">Useername: </label>
+          </div>
+          <div>
+            <input class="col-12 mb-3" type="text" name="username" />
+          </div>
+          <div class="col-12 mb-3">
+            <label for="">Password: </label>
+          </div>
+          <div class="col-12 mb-3">
+            <input class="col-12 mb-3" type="password" name="password" />
+          </div>
+          <div class="col-12 mb-3">
+            <button type="submit" class="col-12 btn btn-primary">Log In</button>
+          </div>
+          <div class="col-12 mb-3">
+            <div
+              id="g_id_onload"
+              data-client_id="321162226361-3lt66a88tl8a03dj3cabjakfjdsj47h9.apps.googleusercontent.com"
+              data-login_uri="http://localhost:3000/events"
+            >
+              {{! data-auto_prompt="false"> }}
+            </div>
+            <div
+              class="g_id_signin"
+              data-type="standard"
+              data-size="large"
+              data-theme="outline"
+              data-text="sign_in_with"
+              data-shape="rectangular"
+              data-logo_alignment="left"
+            >
+            </div>
+          </div>
+          <div class="col-12 mb-3">
+            {{#if message}}
+              <h3>{{message}}</h3>
+            {{/if}}
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </main>
