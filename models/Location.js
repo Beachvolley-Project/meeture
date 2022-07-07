@@ -28,6 +28,9 @@ const locationSchema = new Schema(
       type: String,
       trim: true,
       required: true
+    },
+    coordinates: {
+      type: [Number]
     }
   },
   {
