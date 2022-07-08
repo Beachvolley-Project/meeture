@@ -67,6 +67,14 @@ header {
   background-position: center;
 }
 
+/* .bg-picture {
+  margin-top: -30px;
+  background-image: url("../images/foto1.jpg");
+  height: 470px;
+  background-size: cover;
+  background-position: center;
+} */
+
 .bg-meeture {
   margin-top: -50px;
 }
