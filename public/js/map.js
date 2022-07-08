@@ -54,8 +54,5 @@ const addMarker = () =>  {
  map.on("load", addMarker)
  addMarker();
 
-
-
 const nav = new mapboxgl.NavigationControl()
 map.addControl(nav, 'top-right')
-
