@@ -7,11 +7,9 @@ const chatId = process.env.CHATID;
 
 const bot = new TelegramBot(token, { polling: false });
 
-const telegrambot = (message, json) => {
+const telegrambot = (message) => {
   try {
-    bot.sendMessage(chatId, message + '\n\n<pre>' + JSON.stringify(json, null, 2) + '</pre>', {
-      parse_mode: 'html'
-    });
+    bot.sendMessage(chatId, message);
   } catch (err) {
     console.log('Something went wrong when trying to send a Telegram notification', err);
   }
