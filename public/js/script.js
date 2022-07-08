@@ -1,3 +1,5 @@
+import Event from './models/Location.js';
+
 document.addEventListener(
   "DOMContentLoaded",
   () => {
@@ -11,3 +13,4 @@ document.addEventListener(
   .addEventListener('click', function() {
     console.log('hello world')
   }) */
+
