@@ -15,6 +15,4 @@ const telegrambot = (message) => {
   }
 }
 
-
-
 module.exports = telegrambot;
