@@ -9,69 +9,53 @@ const map = new mapboxgl.Map({
   projection: "globe", // display the map as a 3D globe
 });
 
-new mapboxgl.Marker({
-  color: "green",
-  draggable: true,
+axios.get("/api/locations").then(response => {
+	for (let i = 0; i < response.data.length; i++) {
+		addMarker1(response.data[i])
+	}
 })
-  .setLngLat([13.453281, 52.5329816])
-  .addTo(map)
-  .on("dragend", (event) => console.log(event.target._lngLat));
 
-new mapboxgl.Marker({
-  color: "red",
-  draggable: true,
-})
-  .setLngLat([13.384521537181707, 52.53396355686272])
-  .addTo(map)
-  .on("dragend", (event) => console.log(event.target._lngLat));
+const addMarker1 = (data) =>  {
+	const marker = new mapboxgl.Marker({ "color": "red" })
+	const minPopup = new mapboxgl.Popup()
 
-new mapboxgl.Marker({
-  color: "red",
-  draggable: true,
-})
-  .setLngLat([13.372996532790966, 52.49665215758351])
-  .addTo(map)
-  .on("dragend", (event) => console.log(event.target._lngLat));
+	minPopup.setHTML(`<h3>${data.name}</h3> <br> <p>${data.address}</p>`)
+	marker.setPopup(minPopup)
+	marker.setLngLat(data.coordinates)
+	marker.addTo(map)	
+}
+map.on("load", addMarker1)
+	
+const addMarker = () =>  {
+	const options = {
+		enableHighAccuracy: true,
+		timeout: 5000,
+		maximumAge: 0
+	  };
+	  
+	  function success(pos) {
+		const crd = pos.coords;
+		const marker = new mapboxgl.Marker({ "color": "green" })
+		const minPopup = new mapboxgl.Popup()
 
-new mapboxgl.Marker({
-  color: "red",
-  draggable: true,
-})
-  .setLngLat([13.370462607252215, 52.42737821117734])
-  .addTo(map)
-  .on("dragend", (event) => console.log(event.target._lngLat));
+		minPopup.setHTML("<h3>You are here</h3>")
+		marker.setPopup(minPopup)
+		marker.setLngLat([crd.longitude, crd.latitude])
+		marker.addTo(map)
+	  }
+	  
+	  function error(err) {
+		console.warn(`ERROR(${err.code}): ${err.message}`);
+	  }
+	  
+	  navigator.geolocation.getCurrentPosition(success, error, options);		
+}
 
-new mapboxgl.Marker({
-  color: "red",
-  draggable: true,
-})
-  .setLngLat([13.364415592598993, 52.48200153089764])
-  .addTo(map)
-  .on("dragend", (event) => console.log(event.target._lngLat));
+ map.on("load", addMarker)
+ addMarker();
 
-new mapboxgl.Marker({
-  color: "red",
-  draggable: true,
-})
-  .setLngLat([13.477201764928068, 52.53047971546039])
-  .addTo(map)
-  .on("dragend", (event) => console.log(event.target._lngLat));
 
-new mapboxgl.Marker({
-  color: "red",
-  draggable: true,
-})
-  .setLngLat([13.391220678423526, 52.588963796824416])
-  .addTo(map)
-  .on("dragend", (event) => console.log(event.target._lngLat));
 
-new mapboxgl.Marker({
-  color: "red",
-  draggable: true,
-})
-  .setLngLat([13.442090409832312, 52.528733677798506])
-  .addTo(map)
-  .on("dragend", (event) => console.log(event.target._lngLat));
+const nav = new mapboxgl.NavigationControl()
+map.addControl(nav, 'top-right')
 
-const nav = new mapboxgl.NavigationControl();
-map.addControl(nav, "top-right");
