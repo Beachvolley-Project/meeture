@@ -33,7 +33,13 @@
         <h5>Available slots: {{availableSlots}}</h5>
         {{!-- <a href="/events/{{id}}/edit">Edit the event</a> --}}
         {{!-- <form action="/events/{{id}}"><button class="btn btn-primary">Join</button></form> --}}
-      <div class="col-10">   
+      <div class="col-10">  
+        <div class="card-body text-center">
+          <a
+            class="btn btn-success btn-large"
+            href="/events/{{id}}"
+          >Join</a>
+      </div> 
         <div class="col">   
         <a class="btn btn-primary col-12 mb-2" href="/events/{{id}}/edit">Edit
           the event</a>
@@ -41,6 +47,11 @@
           <button type="submit" class="btn btn-danger col-12 mb-2" >Delete the
             Event</button>
         </form>
+          <div class="col-12">
+            {{#if message}}
+              <h3>{{message}}</h3>
+            {{/if}}
+          </div>
         </div>
       </div> 
       {{/with}}
