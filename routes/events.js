@@ -24,7 +24,6 @@ router.get(
             hour: hour[i],
           });
         }
-        // console.log(eventos);
         res.render("events/index", {
           eventList: eventos,
         });
@@ -38,7 +37,6 @@ router.post("/events", (req, res, next) => {
     .populate("creator")
     .populate("location")
     .then((eventsFromDB) => {
-      // console.log("contro: ", eventsFromDB);
       res.render("events/index", { eventList: eventsFromDB });
     })
     .catch((err) => next(err));
@@ -55,13 +53,8 @@ router.get("/events/new", (req, res, next) => {
     });
 });
 
-// // CREATES NEW EVENT
-// router.get("/events/new", (req, res, next) => {
-//   res.render("events/new");
-// });
 
 // ADD II : POSTS THE ENTRIES TO EVENTS PAGE
-
 router.post("/events/new", (req, res, next) => {
   // console.log(req.session.currentUser);
   const userId = req.session.currentUser._id;
@@ -76,7 +69,6 @@ router.post("/events/new", (req, res, next) => {
     creator: userId,
   })
     .then((newEvent) => {
-      //console.log(newEvent);
       telegrambot("A new beachvolley event is created! Check the website out!");
       res.redirect("/events");
     })
@@ -85,8 +77,8 @@ router.post("/events/new", (req, res, next) => {
     });
 });
 
-//GO TO JOIN PAGE
 
+//GO TO JOIN PAGE
 router.get("/events/:id", (req, res, next) => {
   const eventId = req.params.id;
   const userId = req.session.currentUser._id;
@@ -112,50 +104,11 @@ router.get("/events/:id", (req, res, next) => {
     });
 });
 
-// router.get("/events/eventDetails", (req, res, next) => {
-//   const eventId = req.params.id;
-//   const userId = req.session.currentUser._id;
-//   console.log("userObject: ", userId);
-//   Event.findById(eventId)
-//     .populate("participants")
-//     .populate('location')
-//     .then((eventFromDb) => {
-//       console.log('eventFromDb: ', eventFromDb);
-//       let participants = eventFromDb.participants.map(participant => participant.id);
-//       if (!participants.includes(userId) && eventFromDb.availableSlots >=1) {
-//         eventFromDb.participants.push(userId);
-//         eventFromDb.availableSlots = eventFromDb.availableSlots - 1;
-//         eventFromDb.save();
-//       }
-//       console.log('participants: ',participants)
-//       res.render("events/eventDetails", { event: eventFromDb});
-//     })
-//     .catch((err) => {
-//       next(err);
-//     });
-// });
 
-/* router.post('/events/:id', (req, res, next) => {
-  const eventId = req.params.id;
-  const userId = req.session.currentUser._id;
-  Event.findByIdAndUpdate(eventId)
-  .populate("participants")
-  .then((eventFromDb) => {
-    console.log(eventFromDb.participants)
-    eventFromDb.participants.push(userId);
-    eventFromDb.availableSlots = eventFromDb.availableSlots - 1;
-    eventFromDb.save();
-    res.render("events/eventDetails", { event: eventFromDb });
-  })
-  .catch((err) => {
-    next(err);
-  });
-}) */
 
 router.get("/events/:id/edit", (req, res, next) => {
   const eventId = req.params.id;
   const userId = req.session.currentUser._id;
-  //console.log(req.params)
 
   Event.findById(eventId)
     .populate("participants")

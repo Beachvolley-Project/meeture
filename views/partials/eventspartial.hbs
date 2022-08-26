@@ -3,17 +3,15 @@
     class="card border-secondary shadow mb-5 bg-body rounded"
     style="width: 18rem;"
   >
-    <!-- <img src="..." class="card-img-top" alt="..." /> -->
+    
     <div class="card-body">
       <h5 class="card-title">Name: {{events.title}}</h5>
     </div>
     <ul class="list-group list-group-flush">
       <li class="list-group-item">Day: {{day}}</li>
       <li class="list-group-item">Hour: {{hour}}</li>
-      {{!-- <li class="list-group-item">Prices: {{location.prices}}</li> --}}
       <li class="list-group-item">Capacity: {{events.capacity}}</li>
       <li class="list-group-item">Location: {{events.location.name}}</li>
-      {{!-- <li class="list-group-item">Location: {{location.address}}</li> --}}
       <li class="list-group-item">Available Slots:
         {{events.availableSlots}}</li>
       <li class="list-group-item">Creator: {{events.creator.username}}</li>

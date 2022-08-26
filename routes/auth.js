@@ -75,11 +75,6 @@ router.post("/login", (req, res, next) => {
         console.log("this is the userId", user);
         res.redirect(
           "/events"
-          // , {
-          //   // this has to be the event page
-          //   user: user,
-          //   userInSession: req.session.currentUser,
-          // }
         );
       } else {
         res.render("login", { errorMessage: "Incorrect password." });
@@ -88,7 +83,7 @@ router.post("/login", (req, res, next) => {
     .catch((error) => next(error));
 });
 
-//we have to make a POST request to /logout route
+
 router.post(
   "/logout",
   /* isLoggedIn, */ (req, res, next) => {
