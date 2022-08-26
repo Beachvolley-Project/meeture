@@ -17,12 +17,6 @@ hbs.registerHelper("isZero", function (value) {
   return value === 0;
 });
 
-/* //telegram-notify
-const Telegram = require('telegram-notify');
-let notify = new Telegram({token:process.env.TELEGRAMTOKEN, chatId:process.env.CHATID});
-(async function (){
-  await notify.send('alert');
-})() */
 
 const path = require("path");
 

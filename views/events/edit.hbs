@@ -7,7 +7,6 @@
       <div class="card-body">
         <h2 class="card-title">Edit the Event</h2>
       </div>
-        {{! this should be the link from route.post }}
         <form action="/events/{{event.id}}/edit" method="post">
           <div>
             <label class="col-12" for="title">Title: </label>
@@ -40,48 +39,7 @@
             name="availableSlots"
             class="col-12 mb-3"
           />
-
           <button class="btn btn-primary col-12 mb-3" type="submit">Edit the event</button>
-
-
-
-
-
-
-
-
-          {{!-- <label for="title">Title: </label>
-          <input type="text" value="{{event.title}}" name="title" />
-
-          <label for="date">Date: </label>
-          <input type="text" value="{{event.date}}" name="date" />
-
-          <label for="capacity">Capacity: </label>
-          <input type="text" value="{{event.capacity}}" name="capacity" />
-
-          <select name="location">
-            {{#each locationList}}
-              <option value="{{_id}}">{{name}}</option>
-            {{/each}}
-          </select> --}}
-          {{!--     {{#each participants}}
-    <label for="participants">Participants: </label>
-    <input type="text" value="{{event.participants.username}}" name="participants">
-    {{/each}} --}}
-
-          {{!-- <label for="availableSlots">Available Slots: </label>
-          <input
-            type="text"
-            value="{{event.availableSlots}}"
-            name="availableSlots"
-          /> --}}
-
-          {{!-- {{#each participants}}
-    <input type="checkbox" id={{name}} name="cast" value={{_id}}>
-    <label for={{name}}>{{name}}</label>
-    {{/each}} --}}
-{{!-- 
-          <button type="submit">Edit the event</button> --}}
         </form>
       </div>
     </div>
