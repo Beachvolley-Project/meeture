@@ -6,3 +6,7 @@ The map shows the location that you are under the green flag and it is easy to l
 In order not to forget the event date, Meeture users can join the Telegram group and receive a notification whenever an event is created.
 Now every Berliner is ready to enjoy the summer!
 
+Tech stack: JavaScript, Express, NodeJS, Handlebars, Bootstrap
+
+Link: https://meeture-berlin.herokuapp.com/
+
