@@ -8,9 +8,4 @@ document.addEventListener(
   false
 );
 
-/* document
-  .querySelector('.joinButton')
-  .addEventListener('click', function() {
-    console.log('hello world')
-  }) */
 
