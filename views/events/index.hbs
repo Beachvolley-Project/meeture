@@ -6,8 +6,18 @@
   ></div>
 </div>
 <div class="container text-center mt-4">
-  <h2>Events List</h2>
+  <div class="row">
+    <div class="container">
+  <a class="btn btn-primary mb-2" href="/events/new">Create an Event</a>
+    <form id="logout-form" action="/logout" method="POST">
+      <button class="btn btn-primary mb-4">Logout</button>
+    </form>
+    
+   <h2>Events List</h2> 
+  </div> 
+  </div>
 </div>
+
 
 <div class="align-items-center">
   <div
@@ -19,12 +29,6 @@
       {{/each}}
     </div>
 
-  <div class="container">
-  <a class="btn btn-primary mb-2" href="/events/new">Create an Event</a>
-    <form id="logout-form" action="/logout" method="POST">
-      <button class="btn btn-primary">Logout</button>
-    </form>
-  </div> 
   </div>
 </div>
 

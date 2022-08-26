@@ -1,14 +1,14 @@
 const router = require("express").Router();
 const Event = require("../models/Event");
 const Location = require("../models/Location");
-//const { isLoggedOut, isLoggedIn } = require("../middleware/route-guard");
+const { isLoggedOut, isLoggedIn } = require("../middleware/route-guard");
 const telegrambot = require("../telegram-notify");
 
 // SHOWS THE EVENTS ON THE EVENTS PAGE
 
 router.get(
   "/events",
-   /* isLoggedIn, */ (req, res, next) => {
+   isLoggedIn, (req, res, next) => {
     Event.find()
       .populate("creator")
       .populate("location")
@@ -32,7 +32,7 @@ router.get(
   }
 );
 
-router.post("/events", /* isLoggedIn, */ (req, res, next) => {
+router.post("/events", isLoggedIn, (req, res, next) => {
   Event.find()
     .populate("creator")
     .populate("location")
