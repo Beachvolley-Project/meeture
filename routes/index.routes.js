@@ -3,7 +3,7 @@ const Location = require("../models/Location");
 
 
 router.get("/", (req, res, next) => {
-  res.render("index");
+  res.render("index", {user : req.session.currentUser} );
 });
 
 router.get("/api/locations", (req, res, next) => {

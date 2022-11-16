@@ -25,7 +25,7 @@ router.get(
           });
         }
         res.render("events/index", {
-          eventList: eventos,
+          eventList: eventos, user : req.session.currentUser
         });
       })
       .catch((err) => next(err));
@@ -46,7 +46,7 @@ router.post("/events", isLoggedIn, (req, res, next) => {
 router.get("/events/new", (req, res, next) => {
   Location.find()
     .then((locationFromDb) => {
-      res.render("events/new", { locationList: locationFromDb });
+      res.render("events/new", { locationList: locationFromDb, user : req.session.currentUser });
     })
     .catch((err) => {
       next(err);
@@ -96,8 +96,7 @@ router.get("/events/:id", (req, res, next) => {
         eventFromDb.availableSlots = eventFromDb.availableSlots - 1;
         eventFromDb.save();
       }
-      console.log("participants: ", participants);
-      res.render("events/eventDetails", { event: eventFromDb });
+      res.render("events/eventDetails", { event: eventFromDb, user : req.session.currentUser });
     })
     .catch((err) => {
       next(err);
@@ -121,12 +120,11 @@ router.get("/events/:id/edit", (req, res, next) => {
           res.render("events/edit", {
             event: eventFromDB,
             locationList: locationsFromDB,
+            
           });
         });
       } else {
-        res.render("events/eventDetails", {
-          message: "You are not the creator of this event",
-        });
+        negative(res, req)
       }
     })
     .catch((err) => {
@@ -157,14 +155,28 @@ router.post("/events/:id/edit", (req, res, next) => {
 
 router.post("/events/:id/delete", (req, res, next) => {
   const eventId = req.params.id;
-  console.log("Funca!!", eventId);
-  Event.findByIdAndRemove(eventId)
-    .then((deletedEvent) => {
-      res.redirect("/events");
+  const userId = req.session.currentUser._id;
+  Event.findById(eventId)
+    .then((eventFromDB) => {
+      if (eventFromDB.creator.toString() !== userId) {
+        negative(res, req)
+      } else {
+        Event.findByIdAndRemove(eventId)
+          .then((deletedEvent) => {
+            res.redirect("/events");
+        })
+      }
     })
     .catch((err) => {
       next(err);
     });
 });
+
+function negative(res, req){
+  return res.render("events/eventDetails", {
+    message: "You are not the creator of this event!!!",
+    user : req.session.currentUser
+  });
+}
 
 module.exports = router;

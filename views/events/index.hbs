@@ -1,4 +1,4 @@
-<div class="container col-12 col-md-9 align-items-center mt-2">
+<div class="container col-12 col-md-10 col-lg-9 align-items-center mt-2">
   <div
     id="map"
     class="mt-0 "
@@ -6,12 +6,18 @@
   ></div>
 </div>
 <div class="container text-center mt-4">
-  <div class="row">
     <div class="container">
-  <a class="btn btn-primary mb-2" href="/events/new">Create an Event</a>
+    <a href="/events/new" ><button class="btn btn-primary mb-2 aling-items-rigth" >Create an Event</button></a>
+    {{!-- <form id="logout-form" action="/logout" method="POST">
+      <button class="btn btn-primary mb-4">Logout</button>
+    </form> --}}
+     {{!-- <div class="container">
+      <div class="d-flex flex-row justify-content-around">
+   <a href="/events/new" ><button class="btn btn-primary mb-2" >Create an Event</button></a>
     <form id="logout-form" action="/logout" method="POST">
       <button class="btn btn-primary mb-4">Logout</button>
     </form>
+      </div --}}
     
    <h2>Events List</h2> 
   </div> 
@@ -19,16 +25,20 @@
 </div>
 
 
-<div class="align-items-center">
-  <div
-    class='container text-center d-flex flex-column alto justify-content-center  mt-4'
+{{!-- <div class="container d-flex justify-content-center align-items-center"> --}}
+  {{!-- <div
+    class='d-flex justify-content-around flex-colum text-center alto mt-4'
+  > --}}
+  <div class="container text-center">
+   <div
+    class='d-flex justify-content-around text-center alto mt-4'
   >
     <div class='row'>
       {{#each eventList}}
           {{> eventspartial}}
       {{/each}}
     </div>
-
+    </div>
   </div>
-</div>
+{{!-- </div> --}}
 

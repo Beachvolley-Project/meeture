@@ -24,6 +24,7 @@
       rel="stylesheet"
     />
     <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.min.js" integrity="sha512-xIPqqrfvUAc/Cspuj7Bq0UtHNo/5qkdyngx6Vwt+tmbvTLDszzXM0G6c91LXmGrRx8KEPulT+AfOOez+TeVylg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
   </head>
 
@@ -64,15 +65,24 @@
                   href="/"
                 >Home</a>
               </li>
+              {{#if user}}
+              <li class="nav-item">
+                <a class="nav-link text-white" href="/events">Events</a>
+              </li>
+              <li>
+                <form id="logout-form" action="/logout" method="POST">
+                  <button class="btn text-white">Logout</button>
+                </form>
+              </li>
+        
+              {{else}}
               <li class="nav-item">
                 <a class="nav-link text-white" href="/signup">Sign Up</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link text-white" href="/login">Log In</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link text-white" href="/events">Events</a>
-              </li>
+                {{/if}}
             </ul>
           </div>
         </div>
