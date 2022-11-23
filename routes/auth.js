@@ -5,27 +5,27 @@ const { isLoggedIn, isLoggedOut } = require("../middleware/route-guard");
 const saltRounds = 10;
 
 router.get("/signup", isLoggedOut, (req, res, next) => {
-    res.render("signup");
+    res.render("auth/signup");
   }
 );
 
 router.post("/signup", isLoggedOut, (req, res, next) => {
     const { username, password } = req.body;
     if (password.length < 4) {
-      res.render("signup", {
+      res.render("auth/signup", {
         message: "Password has to be minimum 4 characters.",
       });
       return;
     }
     if (username === "") {
-      res.render("signup", { message: "Username cannot be empty." });
+      res.render("auth/signup", { message: "Username cannot be empty." });
     }
     if (password.length === "") {
-      res.render("signup", { message: "Password cannot be empty" });
+      res.render("auth/signup", { message: "Password cannot be empty" });
     }
     User.findOne({ username: username }).then((userFromDB) => {
       if (userFromDB !== null) {
-        res.render("signup", { message: "The username is already taken" });
+        res.render("auth/signup", { message: "The username is already taken" });
         return;
       } else {
         const salt = bcrypt.genSaltSync();
@@ -48,13 +48,13 @@ router.post("/signup", isLoggedOut, (req, res, next) => {
 );
 
 router.get("/login",isLoggedOut, (req, res, next) => {
-  res.render("login");
+  res.render("auth/login");
 });
 
 router.post("/login", isLoggedOut, (req, res, next) => {
   const { username, password } = req.body;
   if (username === "" || password === "") {
-    res.render("login", {
+    res.render("auth/login", {
       errorMessage: "Please enter both, username and password to login.",
     });
     return;
@@ -62,7 +62,7 @@ router.post("/login", isLoggedOut, (req, res, next) => {
   User.findOne({ username })
     .then((user) => {
       if (!user) {
-        res.render("login", {
+        res.render("auth/login", {
           errorMessage: "Username is not registered. Try with other username.",
         });
         return;
@@ -73,7 +73,7 @@ router.post("/login", isLoggedOut, (req, res, next) => {
           "/events"
         );
       } else {
-        res.render("login", { errorMessage: "Incorrect password." });
+        res.render("auth/login", { errorMessage: "Incorrect password." });
       }
     })
     .catch((error) => next(error));
