@@ -1,12 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Caveat+Brush&family=Lato&family=Righteous&family=Roboto:wght@300;400&display=swap");
-
-/*     font-family: 'Caveat Brush', cursive;
-
-    font-family: 'Lato', sans-serif;
-
-    font-family: 'Righteous', cursive;
-
-    font-family: 'Roboto', sans-serif;*/
+@import url('https://fonts.googleapis.com/css2?family=Caveat+Brush&family=Lato&family=Righteous&family=Roboto:wght@300;400&display=swap');
 
 * {
   margin: 0;
@@ -26,7 +18,7 @@ h5,
 h6,
 p,
 a {
-  font-family: "Lato", sans-serif;
+  font-family: 'Lato', sans-serif;
 }
 
 h1 {
@@ -34,7 +26,7 @@ h1 {
 }
 
 .text-logo {
-  font-family: "Righteous", cursive;
+  font-family: 'Righteous', cursive;
 }
 
 .btn-primary {
@@ -48,38 +40,19 @@ h1 {
 .border-primary {
   background-color: rgb(9, 25, 116);
 }
-/* 
-header {
-  background-image: url("https://images.unsplash.com/photo-1592656094267-764a45160876?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80");
-} */
 
-/* header {
-  background-image: url("../images/foto1.jpg");
-  height: 500px;
-  background-size: cover;
-  background-position: center;
-} */
 .after-header {
   margin-top: -30px;
-  background-image: url("../images/foto1.jpg");
+  background-image: url('../images/foto1.jpg');
   height: 470px;
   background-size: cover;
   background-position: center;
 }
-
-/* .bg-picture {
-  margin-top: -30px;
-  background-image: url("../images/foto1.jpg");
-  height: 470px;
-  background-size: cover;
-  background-position: center;
-} */
 
 .bg-meeture {
   margin-top: -50px;
 }
 
 .transform {
-  /* display: flex; */
   transform: translateX(-44%);
 }

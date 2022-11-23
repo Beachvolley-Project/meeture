@@ -1,62 +1,61 @@
-const router = require("express").Router();
-const Event = require("../models/Event");
-const Location = require("../models/Location");
-const { isLoggedOut, isLoggedIn } = require("../middleware/route-guard");
-const telegrambot = require("../telegram-notify");
+const router = require('express').Router();
+const Event = require('../models/Event');
+const Location = require('../models/Location');
+const { isLoggedOut, isLoggedIn } = require('../middleware/route-guard');
+const telegrambot = require('../telegram-notify');
 
 // SHOWS THE EVENTS ON THE EVENTS PAGE
 
-router.get(
-  "/events",
-   isLoggedIn, (req, res, next) => {
-    Event.find()
-      .populate("creator")
-      .populate("location")
-      .then((eventsFromDB) => {
-        const preview = eventsFromDB.map((event) => event.date.toString());
-        const day = preview.map((day) => day.slice(0, 15));
-        const hour = preview.map((hour) => hour.slice(16, 21));
-        let eventos = [];
-        for (let i = 0; i < eventsFromDB.length; i++) {
-          eventos.push({
-            events: eventsFromDB[i],
-            day: day[i],
-            hour: hour[i],
-          });
-        }
-        res.render("events/index", {
-          eventList: eventos, user : req.session.currentUser
-        });
-      })
-      .catch((err) => next(err));
-  }
-);
-
-router.post("/events", isLoggedIn, (req, res, next) => {
+router.get('/events', isLoggedIn, (req, res, next) => {
   Event.find()
-    .populate("creator")
-    .populate("location")
+    .populate('creator')
+    .populate('location')
     .then((eventsFromDB) => {
-      res.render("events/index", { eventList: eventsFromDB });
+      const preview = eventsFromDB.map((event) => event.date.toString());
+      const day = preview.map((day) => day.slice(0, 15));
+      const hour = preview.map((hour) => hour.slice(16, 21));
+      let eventos = [];
+      for (let i = 0; i < eventsFromDB.length; i++) {
+        eventos.push({
+          events: eventsFromDB[i],
+          day: day[i],
+          hour: hour[i],
+        });
+      }
+      res.render('events/index', {
+        eventList: eventos,
+        user: req.session.currentUser,
+      });
+    })
+    .catch((err) => next(err));
+});
+
+router.post('/events', isLoggedIn, (req, res, next) => {
+  Event.find()
+    .populate('creator')
+    .populate('location')
+    .then((eventsFromDB) => {
+      res.render('events/index', { eventList: eventsFromDB });
     })
     .catch((err) => next(err));
 });
 
 // ADD I : LISTS THE LOCATIONS TO SELECT
-router.get("/events/new", (req, res, next) => {
+router.get('/events/new', (req, res, next) => {
   Location.find()
     .then((locationFromDb) => {
-      res.render("events/new", { locationList: locationFromDb, user : req.session.currentUser });
+      res.render('events/new', {
+        locationList: locationFromDb,
+        user: req.session.currentUser,
+      });
     })
     .catch((err) => {
       next(err);
     });
 });
 
-
 // ADD II : POSTS THE ENTRIES TO EVENTS PAGE
-router.post("/events/new", (req, res, next) => {
-  // console.log(req.session.currentUser);
+router.post('/events/new', (req, res, next) => {
   const userId = req.session.currentUser._id;
   console.log(userId);
   const { title, date, capacity, location } = req.body;
@@ -68,63 +67,71 @@ router.post("/events/new", (req, res, next) => {
     location: location,
     creator: userId,
   })
-    .then((newEvent) => {
-      telegrambot("A new beachvolley event is created! Check the website out!");
-      res.redirect("/events");
+    .then((e) => {
+      console.log(
+        `A new beachvolley event is created! Event name: ${
+          e.title
+        }, date: ${e.date.toString().slice(0, 21)}, capacity: ${
+          e.capacity
+        } persons.  Check the website out!`,
+      );
+      telegrambot(
+        `A new beachvolley event is created! Event name: ${e.title}, date: ${e.date}, capacity: ${e.capacity} persons.  Check the website out!`,
+      );
+      res.redirect('/events');
     })
     .catch((err) => {
-      res.redirect("/events");
+      res.redirect('/events');
     });
 });
 
-
 //GO TO JOIN PAGE
-router.get("/events/:id", (req, res, next) => {
+router.get('/events/:id', (req, res, next) => {
   const eventId = req.params.id;
   const userId = req.session.currentUser._id;
-  console.log("userObject: ", userId);
+  console.log('userObject: ', userId);
   Event.findById(eventId)
-    .populate("participants")
-    .populate("location")
+    .populate('participants')
+    .populate('location')
     .then((eventFromDb) => {
-      console.log("eventFromDb: ", eventFromDb);
+      console.log('eventFromDb: ', eventFromDb);
       let participants = eventFromDb.participants.map(
-        (participant) => participant.id
+        (participant) => participant.id,
       );
       if (!participants.includes(userId) && eventFromDb.availableSlots >= 1) {
         eventFromDb.participants.push(userId);
         eventFromDb.availableSlots = eventFromDb.availableSlots - 1;
         eventFromDb.save();
       }
-      res.render("events/eventDetails", { event: eventFromDb, user : req.session.currentUser });
+      res.render('events/eventDetails', {
+        event: eventFromDb,
+        user: req.session.currentUser,
+      });
     })
     .catch((err) => {
       next(err);
     });
 });
 
-
-
-router.get("/events/:id/edit", (req, res, next) => {
+router.get('/events/:id/edit', (req, res, next) => {
   const eventId = req.params.id;
   const userId = req.session.currentUser._id;
 
   Event.findById(eventId)
-    .populate("participants")
+    .populate('participants')
     .then((eventFromDB) => {
       console.log(userId);
       console.log(eventFromDB.creator);
 
       if (eventFromDB.creator.toString() === userId) {
         Location.find().then((locationsFromDB) => {
-          res.render("events/edit", {
+          res.render('events/edit', {
             event: eventFromDB,
             locationList: locationsFromDB,
-            
           });
         });
       } else {
-        negative(res, req)
+        negative(res, req);
       }
     })
     .catch((err) => {
@@ -132,9 +139,9 @@ router.get("/events/:id/edit", (req, res, next) => {
     });
 });
 
-router.post("/events/:id/edit", (req, res, next) => {
+router.post('/events/:id/edit', (req, res, next) => {
   const eventId = req.params.id;
-  console.log("try: ", req.body);
+  console.log('try: ', req.body);
   const { title, date, capacity, location, participants, availableSlots } =
     req.body;
   Event.findByIdAndUpdate(eventId, {
@@ -146,25 +153,24 @@ router.post("/events/:id/edit", (req, res, next) => {
     availableSlots,
   })
     .then(() => {
-      res.redirect("/events");
+      res.redirect('/events');
     })
     .catch((err) => {
       next(err);
     });
 });
 
-router.post("/events/:id/delete", (req, res, next) => {
+router.post('/events/:id/delete', (req, res, next) => {
   const eventId = req.params.id;
   const userId = req.session.currentUser._id;
   Event.findById(eventId)
     .then((eventFromDB) => {
       if (eventFromDB.creator.toString() !== userId) {
-        negative(res, req)
+        negative(res, req);
       } else {
-        Event.findByIdAndRemove(eventId)
-          .then((deletedEvent) => {
-            res.redirect("/events");
-        })
+        Event.findByIdAndRemove(eventId).then((deletedEvent) => {
+          res.redirect('/events');
+        });
       }
     })
     .catch((err) => {
@@ -172,10 +178,10 @@ router.post("/events/:id/delete", (req, res, next) => {
     });
 });
 
-function negative(res, req){
-  return res.render("events/eventDetails", {
-    message: "You are not the creator of this event!!!",
-    user : req.session.currentUser
+function negative(res, req) {
+  return res.render('events/eventDetails', {
+    message: 'You are not the creator of this event!!!',
+    user: req.session.currentUser,
   });
 }
 
