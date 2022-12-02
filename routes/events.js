@@ -8,6 +8,7 @@ const telegrambot = require('../telegram-notify');
 
 router.get('/events', isLoggedIn, (req, res, next) => {
   Event.find()
+    .sort({ date: 'ascending' })
     .populate('creator')
     .populate('location')
     .then((eventsFromDB) => {
@@ -68,13 +69,6 @@ router.post('/events/new', (req, res, next) => {
     creator: userId,
   })
     .then((e) => {
-      console.log(
-        `A new beachvolley event is created! Event name: ${
-          e.title
-        }, date: ${e.date.toString().slice(0, 21)}, capacity: ${
-          e.capacity
-        } persons.  Check the website out!`,
-      );
       telegrambot(
         `A new beachvolley event is created! Event name: ${e.title}, date: ${e.date}, capacity: ${e.capacity} persons.  Check the website out!`,
       );
