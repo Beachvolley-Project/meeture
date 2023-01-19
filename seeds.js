@@ -14,7 +14,8 @@ const locations = [
         "numberOfCourts": "55",
         "openingHours": "MO-SA 10-22 o’clock",
         "website": "http://www.beachberlin.de/beachmitte.html",
-        "coordinates" : [13.384521537181707, 52.53396355686272]
+        "lng" : 13.384521537181707, 
+        "lat" : 52.53396355686272
       },
       {
         "name": "Beach 61, Park am Gleisdreieck",
@@ -23,7 +24,8 @@ const locations = [
         "numberOfCourts": "25",
         "openingHours": "MO-SA 11:30-22 o’clock",
         "website": "https://www.beach61.de/",
-        "coordinates" : [13.372996532790966, 52.49665215758351]
+        "lng" : 13.372996532790966, 
+        "lat" : 52.49665215758351
       },
       {
         "name": "South Beach (Area 85)",
@@ -32,7 +34,8 @@ const locations = [
         "numberOfCourts": "11",
         "openingHours": "MO-FR 10-24 o’clock • SA-SU 10-22 o’clock",
         "website": "https://area-85.de/beachvolleyball-berlin/",
-        "coordinates" : [13.370462607252215, 52.42737821117734]
+        "lng" : 13.370462607252215, 
+        "lat" : 52.42737821117734
       },
       {
         "name": "East 61",
@@ -41,7 +44,8 @@ const locations = [
         "numberOfCourts": "19",
         "openingHours": "MO-FR 11:30-23:30 o’clock, SA-SU 10:00 – 22:00 o’clock",
         "website": "https://www.beach61.de/",
-        "coordinates" : [13.364415592598993, 52.48200153089764]
+        "lng" : 13.364415592598993, 
+        "lat" : 52.48200153089764
       },
       {
         "name": "Beach Zone Lichtenberg",
@@ -50,7 +54,8 @@ const locations = [
         "numberOfCourts": "14",
         "openingHours": "MO-FR 14 – 21 o’clock, SA 13-22 o’clock, SU 11-22 o’clock",
         "website": "http://beach-zone.de/",
-        "coordinates" : [13.477201764928068, 52.53047971546039]
+        "lng" : 13.477201764928068, 
+        "lat" : 52.53047971546039
       },
       {
         "name": "SPOK (Sport Kultur Pankow)",
@@ -59,7 +64,8 @@ const locations = [
         "numberOfCourts": "6",
         "openingHours": "MO-SU 8-21 o’clock",
         "website": "https://spok.de/index.php/sport/beach-sport",
-        "coordinates" : [13.391220678423526, 52.588963796824416]
+        "lng" : 13.391220678423526, 
+        "lat" : 52.588963796824416
       },
       {
         "name": "Volkspark Friedrichshain",
@@ -68,7 +74,8 @@ const locations = [
         "numberOfCourts": "6",
         "openingHours": "from dusk to an open end (no floodlights in the night)",
         "website": "https://www.berlin.de/en/parks-and-gardens/3560363-4407152-volkspark-friedrichshain.en.html",
-        "coordinates" : [13.442090409832312, 52.528733677798506]
+        "lng" : 13.442090409832312, 
+        "lat" : 52.528733677798506
       }
 ];
 

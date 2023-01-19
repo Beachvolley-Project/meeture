@@ -1,9 +1,7 @@
-import Event from './models/Location.js';
-
 document.addEventListener(
   "DOMContentLoaded",
   () => {
-    console.log("PROJECT-2 JS imported successfully!");
+    console.log("Meeture imported successfully!");
   },
   false
 );

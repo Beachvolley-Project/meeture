@@ -29,12 +29,12 @@ const locationSchema = new Schema(
       trim: true,
       required: true
     },
-    coordinates: {
-      type: [Number]
+    lng: { 
+      type: Number
+    },
+    lat: {
+      type: Number
     }
-  },
-  {
-    timestamps: true,
   }
 );
 

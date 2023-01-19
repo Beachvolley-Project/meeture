@@ -4,8 +4,6 @@ const Location = require('../models/Location');
 const { isLoggedOut, isLoggedIn } = require('../middleware/route-guard');
 const telegrambot = require('../telegram-notify');
 
-// SHOWS THE EVENTS ON THE EVENTS PAGE
-
 router.get('/events', isLoggedIn, (req, res, next) => {
   Event.find()
     .sort({ date: 'ascending' })
@@ -41,7 +39,7 @@ router.post('/events', isLoggedIn, (req, res, next) => {
     .catch((err) => next(err));
 });
 
-// ADD I : LISTS THE LOCATIONS TO SELECT
+
 router.get('/events/new', (req, res, next) => {
   Location.find()
     .then((locationFromDb) => {

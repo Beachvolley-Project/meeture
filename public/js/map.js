@@ -1,32 +1,33 @@
 mapboxgl.accessToken =
 	"pk.eyJ1Ijoic2VtYWd1bCIsImEiOiJjbDU3eDFvc2sxeGw3M2twcHNqMnEzMzJhIn0.aAe0gwAjFIhu1dQkwL1k2g";
-//
+
 const map = new mapboxgl.Map({
-	container: "map", // container ID
-	style: "mapbox://styles/mapbox/streets-v11", // style URL
-	center: [13.404954, 52.520008], // starting position [lng, lat]
-	zoom: 9.5, // starting zoom
-	projection: "globe", // display the map as a 3D globe
+	container: "map", 
+	style: "mapbox://styles/mapbox/streets-v11", 
+	center: [13.404954, 52.520008], 
+	zoom: 9.5, 
+	projection: "globe", 
 });
 
 axios.get("/api/locations").then(response => {
 	for (let i = 0; i < response.data.length; i++) {
-		addMarker1(response.data[i])
+		addMarkers(response.data[i])
 	}
 })
 
-const addMarker1 = (data) => {
+const addMarkers = (data) => {
 	const marker = new mapboxgl.Marker({ "color": "red" })
 	const minPopup = new mapboxgl.Popup()
 
-	minPopup.setHTML(`<h3>${data.name}</h3> <br> <p>${data.address}</p>`)
+	
+	marker.setLngLat([data.lng, data.lat])
 	marker.setPopup(minPopup)
-	marker.setLngLat(data.coordinates)
+	minPopup.setHTML(`<h3>${data.name}</h3> <br> <p>${data.address}</p>`)
 	marker.addTo(map)
 }
-map.on("load", addMarker1)
+//map.on("load", addMarker1)
 
-const addMarker = () => {
+const addMarkerOnUserLoc = () => {
 	const options = {
 		enableHighAccuracy: true,
 		timeout: 5000,
@@ -51,8 +52,8 @@ const addMarker = () => {
 	navigator.geolocation.getCurrentPosition(success, error, options);
 }
 
-map.on("load", addMarker)
-addMarker();
+map.on("load", addMarkerOnUserLoc)
+addMarkerOnUserLoc();
 
 const nav = new mapboxgl.NavigationControl()
 map.addControl(nav, 'top-right')
