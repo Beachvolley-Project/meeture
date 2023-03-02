@@ -22,14 +22,17 @@ Users can RSVP to events created by other users.
 Users can display the beach volleyball courts in Berlin on the map. The map shows the location that you are under the green flag and the seven beach volleyball courts in Berlin under the red flags. 
 
 ### 5. Telegram notifications
-Whenever an event is created, users receive a notification about event date and place on Meeture telegram group. Here is the link to join the Telegram group: https://t.me/meeture
+Whenever an event is created, users receive a notification about event date and place on Meeture telegram group. To join or view the Telegram group you can either scan the QR code below or click on the following link https://t.me/meeture.
 
 <p align="center">
-<img src="readme-telegram.png" width="400" height="240" class="center">
+<img src="telegram.png" width="660" height="240" class="center">
 </p>
 
 ### 6. Responsive design
 Meeture is designed to be responsive and mobile-friendly, allowing users to browse the platform from their smartphones and tablets
+
+## If you want to know more about the developers team and the project...
+[Please click here to have access to slides used during the presentation of Meeture.](https://github.com/semawebdev/meeture/tree/master/public/powerpoint-slides) 
 
 ## Support
 If you encounter any issues while using the platform or have suggestions for improving the application, please get in touch with the developer team.
