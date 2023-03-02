@@ -1,14 +1,43 @@
-# Project-2
-MEETURE <br>
-It is not always easy to find people who want to play beach volleyball at the day, time and place that is convenient for you. This is why we created Meeture, the app that gathers beach volleyball fans. <br>
-After creating an account either directly through the website or connecting through Gmail account, you can either create a match or join in one of those that are already created. On Meeture, you can create an event, pick the date and time slot, define maximum the number of participants up to 10 and select one of the seven beach volleyball courts in Berlin and display their locations on the map. Other than creating the event, you can also join a created event by simply clicking on join button. Once the event is created, the user can update and delete the event. <br>
-The map shows the location that you are under the green flag and it is easy to locate the seven beach volleyball courts that are displayed under the red flags. <br>
-In order not to forget the event date, Meeture users can join the Telegram group and receive a notification whenever an event is created.
-Now every Berliner is ready to enjoy the summer!
+# Meeture
+Welcome to Meeture! Meeture is a website designed for people looking to organize or find beach volleyball matches in Berlin, Germany. [You can access the platform by clicking here.](https://meeture-berlin.onrender.com/)
 
-To get Telegram Notifications when a new event is added: add Meeture on Telegram. Link: https://t.me/meeture 
+<p align="center">
+<img src="readme-demo.gif" width="650" height="500" class="center">
+</p>
 
-Tech stack: JavaScript, Express, NodeJS, Handlebars, Bootstrap
+## Tech stack
+The project is built using JavaScript, Express, NodeJS, Handlebars, Bootstrap
 
-Link: https://meeture-berlin.herokuapp.com/
+## Features
+### 1. User authentication
+Users can create an account and log in to the website using their email and password.
 
+### 2. Event creation and modification
+Users can create an event, select the date, time slot, the maximum number of participants up to 10, and select a location. Once an event is created, the user can modify and delete the event.
+
+### 3. Event RSVP
+Users can RSVP to events created by other users.
+
+### 4. Display map 
+Users can display the beach volleyball courts in Berlin on the map. The map shows the location that you are under the green flag and the seven beach volleyball courts in Berlin under the red flags. 
+
+### 5. Telegram notifications
+Whenever an event is created, users receive a notification about event date and place on Meeture telegram group. Here is the link to join the Telegram group: https://t.me/meeture
+
+<p align="center">
+<img src="readme-telegram.png" width="400" height="240" class="center">
+</p>
+
+### 6. Responsive design
+Meeture is designed to be responsive and mobile-friendly, allowing users to browse the platform from their smartphones and tablets
+
+## Support
+If you encounter any issues while using the platform or have suggestions for improving the application, please get in touch with the developer team.
+
+## Contribution
+We welcome contributions from anyone in the form of feedback, bug reports, feature requests, or code contributions. To contribute to this project, please follow these steps:
+<ol>
+<li>Fork this repository on GitHub.</li>
+<li>Create a new branch for your changes and make your changes on that branch.</li>
+<li>Submit a pull request to merge your changes into the main branch of this repository</li>
+</ol>
